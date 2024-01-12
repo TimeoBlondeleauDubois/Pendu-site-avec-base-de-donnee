@@ -27,6 +27,9 @@
                 <p><a href="/login" class="special-link">Retour à la page de connexion</a></p>
             </div>
         </form>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
     </div>
 </body>
 </html>

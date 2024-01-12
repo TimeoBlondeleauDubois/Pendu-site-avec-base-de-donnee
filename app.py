@@ -28,6 +28,7 @@ def login():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    error = None
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -36,14 +37,14 @@ def signup():
             print("Après create_user: Utilisateur créé avec succès")
             return redirect(url_for('login'))
         else:
-            print("Nom d'utilisateur déja prit")
-            return "Nom d'utilisateur déja prit"
-    return render_template('signup.html')
+            error = 'Nom d\'utilisateur déjà pris'
+    return render_template('signup.html', error=error)
+
 
 
 @app.route('/dashboard')
 def dashboard():
-    return "Tableau de bord - Connecté avec succès!"
+    return render_template('pendu.html')
 
 def check_credentials(username, password):
     with connect_db() as db:

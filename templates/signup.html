@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer un compte</title>
+    <link rel="stylesheet" href="/static/style2.css">
 </head>
 <body>
-    <h2>Créer un compte</h2>
-    <form method="post" action="/signup">
-        <label for="username">Nom d'utilisateur:</label>
-        <input type="text" id="username" name="username" required><br>
-
-        <label for="password">Mot de passe:</label>
-        <input type="password" id="password" name="password" required><br>
-
-        <input type="submit" value="Valider">
-    </form>
-    <form action="http://127.0.0.1:5000/login">
-        <button type="submit">Retour à la page de connexion</button>
-    </form>
+    <div class="wrapper">
+        <form method="post" action="/signup">
+            <h1>Créer un compte</h1>
+            <div class="input-box">
+                <label for="username">Nom d'utilisateur:</label>
+                <input type="text" id="username" name="username" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <button type="submit" class="btn">Valider</button>
+        </form>
+        <form action="/login">
+            <div class="register-link">
+                <p><a href="/login" class="special-link">Retour à la page de connexion</a></p>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from bcrypt import hashpw, gensalt
 import sqlite3
+import random
 
 app = Flask(__name__)
 
@@ -71,6 +72,16 @@ def create_user(username, password):
     except sqlite3.Error as e:
         print(f"Erreur lors de la création de l'utilisateur : {e}")
         return False
+
+words = ['python', 'flask', 'hangman', 'web', 'game']
+
+@app.route('/start_game', methods=['POST'])
+def start_game():
+    word_to_guess = random.choice(words).upper()
+    guessed_letters = set()
+    attempts_left = 6
+    game_state = '_' * len(word_to_guess)
+    return render_template('pendu.html', word_to_guess=word_to_guess, game_state=game_state, attempts_left=attempts_left, guessed_letters=guessed_letters)
 
 if __name__ == '__main__':
     app.run(debug=True)

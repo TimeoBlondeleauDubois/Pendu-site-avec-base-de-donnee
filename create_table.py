@@ -3,24 +3,22 @@ import sqlite3
 connection = sqlite3.connect('Pendu.db')
 cursor = connection.cursor()
 
-# Table User
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS User (
-    US_Id INTEGER PRIMARY KEY AUTOINCREMENT,
-    Nom_Utilisateur VARCHAR UNIQUE,  -- Ajout d'UNIQUE pour créer un index
-    Mot_De_Passe VARCHAR
+        US_Id INTEGER PRIMARY KEY AUTOINCREMENT,
+        Nom_Utilisateur VARCHAR UNIQUE,  -- Ajout d'UNIQUE pour créer un index
+        Mot_De_Passe VARCHAR
 );
 """)
 
-# Table Liste_De_Mots
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS Liste_De_Mots (
         Li_Id INTEGER PRIMARY KEY AUTOINCREMENT,
-        Mot VARCHAR
+        Mot VARCHAR,
+        Difficulty TINYINT
     );
 """)
 
-# Table Score
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS Score (
         SC_Id INTEGER PRIMARY KEY AUTOINCREMENT,

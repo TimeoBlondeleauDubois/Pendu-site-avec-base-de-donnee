@@ -45,7 +45,7 @@ def signup():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('pendu.html')
+    return render_template('difficulty.html')
 
 def check_credentials(username, password):
     with connect_db() as db:
@@ -73,15 +73,17 @@ def create_user(username, password):
         print(f"Erreur lors de la création de l'utilisateur : {e}")
         return False
 
-words = ['python', 'flask', 'hangman', 'web', 'game']
+@app.route('/dashboard', methods=['GET', 'POST'])
+def choose_difficulty():
+    if request.method == 'POST':
+        difficulty = request.form['difficulty']
+        return redirect(url_for('game', difficulty=difficulty))
+    return render_template('choose_difficulty.html')
 
-@app.route('/start_game', methods=['POST'])
-def start_game():
-    word_to_guess = random.choice(words).upper()
-    guessed_letters = set()
-    attempts_left = 6
-    game_state = '_' * len(word_to_guess)
-    return render_template('pendu.html', word_to_guess=word_to_guess, game_state=game_state, attempts_left=attempts_left, guessed_letters=guessed_letters)
+@app.route('/game/<difficulty>')
+def game(difficulty):
+    return render_template('game.html', difficulty=difficulty)
 
 if __name__ == '__main__':
     app.run(debug=True)
+

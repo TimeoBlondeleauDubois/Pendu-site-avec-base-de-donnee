@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choisissez une difficulté</title>
+</head>
+<body>
+    <h1>Choisissez une difficulté</h1>
+    <form method="post" action="{{ url_for('choose_difficulty') }}">
+        <label>
+            <input type="radio" name="difficulty" value="facile" required>
+            Facile
+        </label>
+
+        <label>
+            <input type="radio" name="difficulty" value="moyen" required>
+            Moyen
+        </label>
+
+        <label>
+            <input type="radio" name="difficulty" value="difficile" required>
+            Difficile
+        </label>
+
+        <button type="submit">Commencer</button>
+    </form>
+</body>
+</html>

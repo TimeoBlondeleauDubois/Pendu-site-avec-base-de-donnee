@@ -1,3 +1,13 @@
+words = ['python', 'flask', 'hangman', 'web', 'game']
+
+@app.route('/start_game', methods=['POST'])
+def start_game():
+    word_to_guess = random.choice(words).upper()
+    guessed_letters = set()
+    attempts_left = 6
+    game_state = '_' * len(word_to_guess)
+    return render_template('pendu.html', word_to_guess=word_to_guess, game_state=game_state, attempts_left=attempts_left, guessed_letters=guessed_letters)
+
 
 @app.route('/play', methods=['POST'])
 def play():

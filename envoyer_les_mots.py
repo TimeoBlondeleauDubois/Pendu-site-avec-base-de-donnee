@@ -202,5 +202,15 @@ INSERT INTO Liste_De_Mots (Mot) VALUES
     ('La');
 """)
 
+cursor.execute("""
+    UPDATE Liste_De_Mots
+    SET Difficulty = 
+        CASE 
+            WHEN LENGTH(Mot) < 6 THEN 1
+            WHEN LENGTH(Mot) BETWEEN 6 AND 9 THEN 2
+            ELSE 3
+        END
+""")
+
 connection.commit()
 connection.close()

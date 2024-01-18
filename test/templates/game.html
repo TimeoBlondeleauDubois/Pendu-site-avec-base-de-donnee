@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu du Pendu</title>
+</head>
+<body>
+    <h1>Jeu du Pendu</h1>
+    <form method="POST" action="/jouer">
+        <label for="lettre">Devinez une lettre :</label>
+        <input type="text" id="lettre" name="lettre" maxlength="1" required>
+        <button type="submit">Soumettre</button>
+    </form>
+    <p>{{ resultat }}</p>
+</body>
+</html>

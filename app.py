@@ -88,12 +88,7 @@ def game(difficulty):
 
 
 
-
-
-
-
-
-
+#Pendu
 def choisir_mot():
     mots = ["python"]
     return random.choice(mots)
@@ -112,7 +107,7 @@ def index():
     if 'mot_a_deviner' not in session:
         session['mot_a_deviner'] = choisir_mot()
 
-    # Réinitialiser les valeurs de session pour une nouvelle partie
+
     session['lettres_trouvees'] = []
     session['tentatives_restantes'] = 6
 
@@ -131,7 +126,7 @@ def jouer():
 
     lettre = request.form.get("lettre").lower()
 
-    # Assurez-vous que les valeurs de session sont correctement initialisées
+
     if 'lettres_trouvees' not in session:
         session['lettres_trouvees'] = []
     if 'tentatives_restantes' not in session:

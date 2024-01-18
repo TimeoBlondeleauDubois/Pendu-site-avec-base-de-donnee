@@ -3,6 +3,7 @@ import sqlite3
 connection = sqlite3.connect('Pendu.db')
 cursor = connection.cursor()
 
+#Intégrer les mots dans la base de donnée
 cursor.execute("""
 INSERT INTO Liste_De_Mots (Mot) VALUES
     ('Banane'), 
@@ -202,6 +203,7 @@ INSERT INTO Liste_De_Mots (Mot) VALUES
     ('La');
 """)
 
+#Asignation de la difficulté
 cursor.execute("""
     UPDATE Liste_De_Mots
     SET Difficulty = 

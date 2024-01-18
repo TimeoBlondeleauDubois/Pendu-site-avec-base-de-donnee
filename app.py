@@ -96,6 +96,7 @@ def game(difficulty):
 
 
 
+
 #Pendu
 def choisir_mot():
     with connect_db() as db:

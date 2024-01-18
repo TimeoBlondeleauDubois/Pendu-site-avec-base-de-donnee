@@ -96,8 +96,6 @@ def game(difficulty):
 
 
 
-
-
 #Pendu
 def choisir_mot():
     with connect_db() as db:
@@ -114,7 +112,6 @@ def choisir_mot():
         return None
 
 
-
 def afficher_mot_cache(mot, lettres_trouvees):
     mot_cache = ""
     for lettre in mot:
@@ -123,6 +120,7 @@ def afficher_mot_cache(mot, lettres_trouvees):
         else:
             mot_cache += "_"
     return mot_cache
+
 
 @app.route("/pendu")
 def index():
@@ -141,10 +139,9 @@ def index():
     print(f"Lettres trouvées : {lettres_trouvees}")
     print(f"Tentatives restantes : {tentatives_restantes}")
 
-    # Réinitialiser les variables de session ici
     session.pop('message_fin', None)
-
     return render_template("game.html", resultat=mot_cache, tentatives_restantes=tentatives_restantes, lettres_trouvees=lettres_trouvees, message="")
+
 
 @app.route("/jouer", methods=["POST"])
 def jouer():
@@ -152,7 +149,6 @@ def jouer():
         session['mot_a_deviner'] = choisir_mot()
 
     lettre = request.form.get("lettre").lower()
-
 
     if 'lettres_trouvees' not in session:
         session['lettres_trouvees'] = []
@@ -185,6 +181,7 @@ def jouer():
 
     return render_template("game.html", resultat=mot_cache, tentatives_restantes=tentatives_restantes, lettres_trouvees=lettres_trouvees, message=message)
 
+
 @app.route("/fin-de-partie")
 def fin_de_partie():
     mot_a_deviner = session.get('mot_a_deviner', '')
@@ -196,6 +193,7 @@ def fin_de_partie():
         resultat = "Perdu"
 
     return render_template("fin_de_partie.html", resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

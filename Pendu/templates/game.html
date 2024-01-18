@@ -13,6 +13,8 @@
         <button type="submit">Soumettre</button>
     </form>
     <p>{{ resultat }}</p>
+    <p>{{ message }}</p>
     <p>Essais restants : {{ tentatives_restantes }}</p>
+    <p>Lettres déjà entrées : {% for lettre in lettres_trouvees %} {{ lettre }} {% endfor %}</p>
 </body>
 </html>

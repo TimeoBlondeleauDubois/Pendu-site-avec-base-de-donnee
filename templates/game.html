@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pendu</title>
+    <title>Jeu du Pendu</title>
 </head>
 <body>
-    <h1>Pendu</h1>
-    <p>Difficulty: {{ difficulty }}</p>
+    <h1>Jeu du Pendu</h1>
+    <form method="POST" action="/jouer">
+        <label for="lettre">Devinez une lettre :</label>
+        <input type="text" id="lettre" name="lettre" maxlength="1" required>
+        <button type="submit">Soumettre</button>
+    </form>
+    <p>{{ resultat }}</p>
+    <p>{{ message }}</p>
+    <p>Essais restants : {{ tentatives_restantes }}</p>
+    <p>Lettres déjà entrées : {% for lettre in lettres_trouvees %} {{ lettre }} {% endfor %}</p>
 </body>
 </html>

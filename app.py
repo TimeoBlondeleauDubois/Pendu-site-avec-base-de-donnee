@@ -6,6 +6,10 @@ import random
 app = Flask(__name__)
 app.secret_key = 'b_5#y2L"F4Q8z\n\xec]/'
 
+
+connection = sqlite3.connect('Pendu.db')
+cursor = connection.cursor()
+
 @app.route('/')
 def home():
     return render_template('login.html')
@@ -81,17 +85,35 @@ def choose_difficulty():
         return redirect(url_for('game', difficulty=difficulty))
     return render_template('choose_difficulty.html')
 
+
 @app.route('/game/<difficulty>')
 def game(difficulty):
+    session['mot_a_deviner'] = choisir_mot()
+    session['lettres_trouvees'] = []
+    session['tentatives_restantes'] = 6
+    session.pop('message_fin', None)  # Réinitialiser la variable message_fin
     return render_template('game.html', difficulty=difficulty)
+
 
 
 
 
 #Pendu
 def choisir_mot():
-    mots = ["python"]
-    return random.choice(mots)
+    with connect_db() as db:
+        cursor = db.cursor()
+        cursor.execute("SELECT Mot FROM Liste_De_Mots ORDER BY RANDOM() LIMIT 1")
+        mot = cursor.fetchone()
+    
+    if mot:
+        mot = mot[0]
+        print(f"Mot choisi : {mot}")
+        return mot
+    else:
+        print("Aucun mot trouvé dans la base de données.")
+        return None
+
+
 
 def afficher_mot_cache(mot, lettres_trouvees):
     mot_cache = ""
@@ -107,7 +129,6 @@ def index():
     if 'mot_a_deviner' not in session:
         session['mot_a_deviner'] = choisir_mot()
 
-
     session['lettres_trouvees'] = []
     session['tentatives_restantes'] = 6
 
@@ -116,8 +137,14 @@ def index():
 
     mot_cache = afficher_mot_cache(session['mot_a_deviner'], lettres_trouvees)
 
-    return render_template("game.html", resultat=mot_cache, tentatives_restantes=tentatives_restantes, lettres_trouvees=lettres_trouvees, message="")
+    print(f"Mot à deviner : {session['mot_a_deviner']}")
+    print(f"Lettres trouvées : {lettres_trouvees}")
+    print(f"Tentatives restantes : {tentatives_restantes}")
 
+    # Réinitialiser les variables de session ici
+    session.pop('message_fin', None)
+
+    return render_template("game.html", resultat=mot_cache, tentatives_restantes=tentatives_restantes, lettres_trouvees=lettres_trouvees, message="")
 
 @app.route("/jouer", methods=["POST"])
 def jouer():
@@ -172,4 +199,7 @@ def fin_de_partie():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+connection.commit()
+connection.close()
 

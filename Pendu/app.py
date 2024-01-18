@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, session
 import random
 
 app = Flask(__name__)
-app.secret_key = 'votre_clé_secrète'
+app.secret_key = 'b_5#y2L"F4Q8z\n\xec]/'
 
 def choisir_mot():
     mots = ["python", "programmation", "informatique", "algorithmique", "developpement"]
@@ -39,10 +39,9 @@ def jouer():
     if lettre in lettres_trouvees:
         return render_template("game.html", resultat="Vous avez déjà deviné cette lettre. Essayez une autre.")
 
-    if lettre in session['mot_a_deviner']:
-        lettres_trouvees.append(lettre)
-    else:
+    if lettre not in session['mot_a_deviner']:
         tentatives_restantes -= 1
+        lettres_trouvees.append(lettre)
 
     session['lettres_trouvees'] = lettres_trouvees
     session['tentatives_restantes'] = tentatives_restantes
@@ -56,7 +55,7 @@ def jouer():
     else:
         resultat = mot_cache
 
-    return render_template("game.html", resultat=resultat)
+    return render_template("game.html", resultat=resultat, tentatives_restantes=tentatives_restantes)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -84,6 +84,58 @@ def choose_difficulty():
 def game(difficulty):
     return render_template('game.html', difficulty=difficulty)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+
+def choisir_mot():
+    mots = ["python", "programmation", "informatique", "algorithmique", "developpement"]
+    return random.choice(mots)
+
+def afficher_mot_cache(mot, lettres_trouvees):
+    mot_cache = ""
+    for lettre in mot:
+        if lettre in lettres_trouvees:
+            mot_cache += lettre
+        else:
+            mot_cache += "_"
+    return mot_cache
+
+def pendu():
+    mot_a_deviner = choisir_mot()
+    lettres_trouvees = []
+    tentatives_max = 6
+    tentatives_restantes = tentatives_max
+
+    print("Bienvenue dans le jeu du pendu!")
+    print(afficher_mot_cache(mot_a_deviner, lettres_trouvees))
+
+    while tentatives_restantes > 0:
+        lettre = input("Devinez une lettre : ").lower()
+
+        if len(lettre) != 1 or not lettre.isalpha():
+            print("Veuillez entrer une seule lettre.")
+            continue
+
+        if lettre in lettres_trouvees:
+            print("Vous avez déjà deviné cette lettre. Essayez une autre.")
+            continue
+
+        if lettre in mot_a_deviner:
+            print("Bonne devinette!")
+            lettres_trouvees.append(lettre)
+        else:
+            print("Incorrect. Vous avez {} tentatives restantes.".format(tentatives_restantes - 1))
+            tentatives_restantes -= 1
+
+        mot_cache = afficher_mot_cache(mot_a_deviner, lettres_trouvees)
+        print(mot_cache)
+
+        if "_" not in mot_cache:
+            print("Félicitations, vous avez deviné le mot!")
+            break
+
+    if "_" in afficher_mot_cache(mot_a_deviner, lettres_trouvees):
+        print("Désolé, vous avez épuisé toutes vos tentatives. Le mot était '{}'.".format(mot_a_deviner))
+
+if __name__ == "__main__":
+    pendu()
 

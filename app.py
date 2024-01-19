@@ -98,6 +98,7 @@ def game(difficulty):
 
 
 #Pendu
+#Pendu
 def choisir_mot():
     with connect_db() as db:
         cursor = db.cursor()
@@ -105,12 +106,13 @@ def choisir_mot():
         mot = cursor.fetchone()
     
     if mot:
-        mot = mot[0]
+        mot = mot[0].lower()  # Convertir le mot à deviner en minuscules
         print(f"Mot choisi : {mot}")
         return mot
     else:
         print("Aucun mot trouvé dans la base de données.")
         return None
+
 
 
 def afficher_mot_cache(mot, lettres_trouvees):
@@ -149,7 +151,7 @@ def jouer():
     if 'mot_a_deviner' not in session:
         session['mot_a_deviner'] = choisir_mot()
 
-    lettre = request.form.get("lettre").lower()
+    lettre = request.form.get("lettre").lower()  # Convertir la lettre en minuscule
 
     if 'lettres_trouvees' not in session:
         session['lettres_trouvees'] = []

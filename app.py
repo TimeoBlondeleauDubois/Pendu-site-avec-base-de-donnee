@@ -169,7 +169,7 @@ def jouer():
     if len(lettre) != 1 or not lettre.isalpha():
         message = "Veuillez entrer une lettre."
     elif lettre in lettres_trouvees:
-        message = "Vous avez déjà deviné cette lettre. Essayez une autre."
+        message = "Vous avez déjà entré cette lettre. Essayez une autre."
     elif lettre not in session['mot_a_deviner']:
         tentatives_restantes -= 1
         lettres_trouvees.append(lettre)
@@ -204,21 +204,25 @@ def fin_de_partie():
     
     if "_" not in afficher_mot_cache(mot_a_deviner, session.get('lettres_trouvees', [])):
         resultat = "Gagné"
-        update_column = f'Nb_Partie_Gagner_{difficulty}'
-        with connect_db() as db:
-            cursor = db.cursor()
-            cursor.execute(f"UPDATE User SET {update_column} = {update_column} + 1, Date_Du_Jeu = ? WHERE US_Id = ?", (Date_Du_Jeu, user_id,))
-            print(f"Mise à jour du nombre de parties gagnées et de la date pour l'utilisateur {user_id}")
     else:
         resultat = "Perdu"
-        update_column = f'Nb_Partie_Perdu_{difficulty}'
-        with connect_db() as db:
-            cursor = db.cursor()
-            cursor.execute(f"UPDATE User SET {update_column} = {update_column} + 1, Date_Du_Jeu = ? WHERE US_Id = ?", (Date_Du_Jeu, user_id,))
-            print(f"Mise à jour du nombre de parties perdues et de la date pour l'utilisateur {user_id}")
+
+    # Enregistrez les détails de la partie dans la table Partie
+    with connect_db() as db:
+        cursor = db.cursor()
+        cursor.execute("INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, User_Id) VALUES (?, ?, ?)",
+                       (Date_Du_Jeu, mot_a_deviner, user_id))
+
+        # Mise à jour des statistiques de l'utilisateur
+        if resultat == "Gagné":
+            update_column = f'Gagne_{difficulty}'
+        else:
+            update_column = f'Perdu_{difficulty}'
+        
+        cursor.execute(f"UPDATE Partie SET {update_column} = {update_column} + 1 WHERE User_Id = ? AND Partie_Id = ?",
+                       (user_id, cursor.lastrowid))
 
     return render_template("fin_de_partie.html", resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty)
-
 if __name__ == "__main__":
     app.run(debug=True)
 

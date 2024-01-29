@@ -8,12 +8,16 @@ cursor.execute("""
         US_Id INTEGER PRIMARY KEY AUTOINCREMENT,
         Nom_Utilisateur VARCHAR UNIQUE,
         Mot_De_Passe VARCHAR,
-        Nb_Partie_Gagner INTEGER DEFAULT 0,
-        Nb_Partie_Perdu INTEGER DEFAULT 0,
-        Niveau_De_Difficulte VARCHAR,
-        Date_Du_Jeu DATETIME
-);
+        Nb_Partie_Gagner_Facile INTEGER DEFAULT 0,
+        Nb_Partie_Perdu_Facile INTEGER DEFAULT 0,
+        Nb_Partie_Gagner_Moyen INTEGER DEFAULT 0,
+        Nb_Partie_Perdu_Moyen INTEGER DEFAULT 0,
+        Nb_Partie_Gagner_Difficile INTEGER DEFAULT 0,
+        Nb_Partie_Perdu_Difficile INTEGER DEFAULT 0,
+        Date_Du_Jeu DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
 """)
+
 
 
 cursor.execute("""

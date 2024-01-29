@@ -95,6 +95,7 @@ def game(difficulty):
     session['mot_a_deviner'] = choisir_mot(difficulty)
     session['lettres_trouvees'] = []
     session['tentatives_restantes'] = 6
+    session['difficulty'] = difficulty  # Ajoutez cette ligne pour stocker la difficulté dans la session
     session.pop('message_fin', None)
     return render_template('game.html', difficulty=difficulty)
 
@@ -193,22 +194,24 @@ def fin_de_partie():
     message_fin = session.get('message_fin', '')
     
     user_id = session.get('user_id')
-    print(f"ID de l'utilisateur : {user_id}")
+    difficulty = session.get('difficulty', 'Facile')
 
     if "_" not in afficher_mot_cache(mot_a_deviner, session.get('lettres_trouvees', [])):
         resultat = "Gagné"
+        update_column = f'Nb_Partie_Gagner_{difficulty}'  # Sélectionnez la bonne colonne en fonction de la difficulté
         with connect_db() as db:
             cursor = db.cursor()
-            cursor.execute("UPDATE User SET Nb_Partie_Gagner = Nb_Partie_Gagner + 1 WHERE US_Id = ?", (user_id,))
+            cursor.execute(f"UPDATE User SET {update_column} = {update_column} + 1 WHERE US_Id = ?", (user_id,))
             print(f"Mise à jour du nombre de parties gagnées pour l'utilisateur {user_id}")
     else:
         resultat = "Perdu"
+        update_column = f'Nb_Partie_Perdu_{difficulty}'  # Sélectionnez la bonne colonne en fonction de la difficulté
         with connect_db() as db:
             cursor = db.cursor()
-            cursor.execute("UPDATE User SET Nb_Partie_Perdu = Nb_Partie_Perdu + 1 WHERE US_Id = ?", (user_id,))
+            cursor.execute(f"UPDATE User SET {update_column} = {update_column} + 1 WHERE US_Id = ?", (user_id,))
             print(f"Mise à jour du nombre de parties perdues pour l'utilisateur {user_id}")
 
-    return render_template("fin_de_partie.html", resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin)
+    return render_template("fin_de_partie.html", resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty)
 
 
 if __name__ == "__main__":

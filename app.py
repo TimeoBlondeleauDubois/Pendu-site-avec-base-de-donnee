@@ -161,7 +161,7 @@ def jouer():
     message = ""
 
     if len(lettre) != 1 or not lettre.isalpha():
-        message = "Veuillez entrer une seule lettre."
+        message = "Veuillez entrer une lettre."
     elif lettre in lettres_trouvees:
         message = "Vous avez déjà deviné cette lettre. Essayez une autre."
     elif lettre not in session['mot_a_deviner']:

@@ -275,63 +275,7 @@ def historique():
             ORDER BY Date_Du_Jeu DESC
         """, (user_id,))
         game_history = cursor.fetchall()
-
-    total_victoires_facile = 0
-    total_defaites_facile = 0
-    total_victoires_moyen = 0
-    total_defaites_moyen = 0
-    total_victoires_difficile = 0
-    total_defaites_difficile = 0
-
-    for game in game_history:
-        resultat = game[2]
-        difficulty = game[3]
-
-        if difficulty == 'Facile':
-            if resultat == 'Gagné':
-                total_victoires_facile += 1
-            else:
-                total_defaites_facile += 1
-        elif difficulty == 'Moyen':
-            if resultat == 'Gagné':
-                total_victoires_moyen += 1
-            else:
-                total_defaites_moyen += 1
-        elif difficulty == 'Difficile':
-            if resultat == 'Gagné':
-                total_victoires_difficile += 1
-            else:
-                total_defaites_difficile += 1
-
-    total_parties_facile = total_victoires_facile + total_defaites_facile
-    total_parties_moyen = total_victoires_moyen + total_defaites_moyen
-    total_parties_difficile = total_victoires_difficile + total_defaites_difficile
-
-    pourcentage_victoires_facile = (total_victoires_facile / total_parties_facile) * 100 if total_parties_facile > 0 else 0
-    pourcentage_defaites_facile = (total_defaites_facile / total_parties_facile) * 100 if total_parties_facile > 0 else 0
-
-    pourcentage_victoires_moyen = (total_victoires_moyen / total_parties_moyen) * 100 if total_parties_moyen > 0 else 0
-    pourcentage_defaites_moyen = (total_defaites_moyen / total_parties_moyen) * 100 if total_parties_moyen > 0 else 0
-
-    pourcentage_victoires_difficile = (total_victoires_difficile / total_parties_difficile) * 100 if total_parties_difficile > 0 else 0
-    pourcentage_defaites_difficile = (total_defaites_difficile / total_parties_difficile) * 100 if total_parties_difficile > 0 else 0
-
-    total_victoires = total_victoires_facile + total_victoires_moyen + total_victoires_difficile
-    total_parties = total_parties_facile + total_parties_moyen + total_parties_difficile
-
-    pourcentage_victoires_total = (total_victoires / total_parties) * 100 if total_parties > 0 else 0
-
-    return render_template('historique.html', game_history=game_history, 
-                           total_parties_facile=total_parties_facile, 
-                           total_parties_moyen=total_parties_moyen, 
-                           total_parties_difficile=total_parties_difficile,
-                           pourcentage_victoires_facile=pourcentage_victoires_facile,
-                           pourcentage_defaites_facile=pourcentage_defaites_facile,
-                           pourcentage_victoires_moyen=pourcentage_victoires_moyen,
-                           pourcentage_defaites_moyen=pourcentage_defaites_moyen,
-                           pourcentage_victoires_difficile=pourcentage_victoires_difficile,
-                           pourcentage_defaites_difficile=pourcentage_defaites_difficile,
-                           pourcentage_victoires_total=pourcentage_victoires_total)
+    return render_template('historique.html', game_history=game_history)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -95,7 +95,7 @@ def game(difficulty):
     session['mot_a_deviner'] = choisir_mot(difficulty)
     session['lettres_trouvees'] = []
     session['tentatives_restantes'] = 6
-    session['difficulty'] = difficulty  # Ajoutez cette ligne pour stocker la difficulté dans la session
+    session['difficulty'] = difficulty
     session.pop('message_fin', None)
     return render_template('game.html', difficulty=difficulty)
 
@@ -187,6 +187,10 @@ def jouer():
     return render_template("game.html", resultat=mot_cache, tentatives_restantes=tentatives_restantes, lettres_trouvees=lettres_trouvees, message=message)
 
 
+@app.route('/recommencer_une_partie')
+def recommencer_une_partie():
+    return render_template('difficulty.html')
+
 #Score
 @app.route("/fin-de-partie")
 def fin_de_partie():
@@ -198,14 +202,14 @@ def fin_de_partie():
 
     if "_" not in afficher_mot_cache(mot_a_deviner, session.get('lettres_trouvees', [])):
         resultat = "Gagné"
-        update_column = f'Nb_Partie_Gagner_{difficulty}'  # Sélectionnez la bonne colonne en fonction de la difficulté
+        update_column = f'Nb_Partie_Gagner_{difficulty}'
         with connect_db() as db:
             cursor = db.cursor()
             cursor.execute(f"UPDATE User SET {update_column} = {update_column} + 1 WHERE US_Id = ?", (user_id,))
             print(f"Mise à jour du nombre de parties gagnées pour l'utilisateur {user_id}")
     else:
         resultat = "Perdu"
-        update_column = f'Nb_Partie_Perdu_{difficulty}'  # Sélectionnez la bonne colonne en fonction de la difficulté
+        update_column = f'Nb_Partie_Perdu_{difficulty}'
         with connect_db() as db:
             cursor = db.cursor()
             cursor.execute(f"UPDATE User SET {update_column} = {update_column} + 1 WHERE US_Id = ?", (user_id,))

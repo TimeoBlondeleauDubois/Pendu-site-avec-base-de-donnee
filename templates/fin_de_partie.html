@@ -6,17 +6,10 @@
     <title>Fin de Partie</title>
 </head>
 <body>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="flash-messages">
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
     <h1>{{ resultat }}</h1>
     <p>Le mot à deviner était : {{ mot_a_deviner }}</p>
+    <a href="/recommencer_une_partie">
+        <input type="button" value="Recommencer une partie" />
+    </a>
 </body>
 </html>

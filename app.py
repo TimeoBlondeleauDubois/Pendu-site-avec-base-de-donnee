@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from bcrypt import hashpw, gensalt
 import sqlite3, random
 from datetime import datetime
+from flask import flash
 
 app = Flask(__name__)
 app.secret_key = 'b_5#y2L"F4Q8z\n\xec]/'
@@ -207,7 +208,10 @@ def fin_de_partie():
     else:
         resultat = "Perdu"
 
-    # Enregistrez les détails de la partie dans la table Partie
+    session['resultat'] = resultat
+    session['difficulty'] = difficulty
+    session['Date_Du_Jeu'] = Date_Du_Jeu
+
     with connect_db() as db:
         cursor = db.cursor()
         cursor.execute("""
@@ -219,7 +223,6 @@ def fin_de_partie():
               int(difficulty == 'Moyen' and resultat == 'Perdu'), int(difficulty == 'Difficile' and resultat == 'Gagné'),
               int(difficulty == 'Difficile' and resultat == 'Perdu'), resultat, difficulty, user_id))
 
-        # Mise à jour des statistiques de l'utilisateur
         if resultat == "Gagné":
             update_column = f'Gagne_{difficulty}'
         else:
@@ -228,12 +231,8 @@ def fin_de_partie():
         cursor.execute(f"UPDATE Partie SET {update_column} = {update_column} + 1 WHERE User_Id = ? AND Partie_Id = ?",
                        (user_id, cursor.lastrowid))
 
-    # Stockez les informations dans la session
-    session['resultat'] = resultat
-    session['difficulty'] = difficulty
-    session['Date_Du_Jeu'] = Date_Du_Jeu
 
-    return render_template("fin_de_partie.html", resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty)
+    return redirect(url_for('afficher_resultat', resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty))
 
 #Classement
 @app.route('/classement')
@@ -261,7 +260,6 @@ def classement():
 def historique():
     user_id = session.get('user_id')
 
-    # Récupérez l'historique des parties pour l'utilisateur actuel depuis la base de données
     with connect_db() as db:
         cursor = db.cursor()
         cursor.execute("""
@@ -274,13 +272,28 @@ def historique():
 
     return render_template('historique.html', game_history=game_history)
 
+@app.route("/afficher_resultat")
+def afficher_resultat():
+    
+    resultat = session.get('resultat', '')
+    mot_a_deviner = session.get('mot_a_deviner', '')
+    message_fin = session.get('message_fin', '')
+    difficulty = session.get('difficulty', 'Facile')
+
+    
+    session.pop('resultat', None)
+    session.pop('mot_a_deviner', None)
+    session.pop('message_fin', None)
+    session.pop('difficulty', None)
+
+    
+    return render_template("fin_de_partie.html", resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty)
 
 
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-connection.commit()
-connection.close()
+    connection.commit()
+    connection.close()
 

@@ -20,6 +20,7 @@ def connect_db():
     return sqlite3.connect(db_path)
 
 
+#Utilisateur
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
@@ -55,15 +56,17 @@ def dashboard():
 def check_credentials(username, password):
     with connect_db() as db:
         cursor = db.cursor()
-        cursor.execute("SELECT Mot_De_Passe FROM User WHERE Nom_Utilisateur = ?", (username,))
-        stored_password = cursor.fetchone()
+        cursor.execute("SELECT US_Id, Mot_De_Passe FROM User WHERE Nom_Utilisateur = ?", (username,))
+        user_data = cursor.fetchone()
 
-    if stored_password is not None:
-        stored_password = stored_password[0]
+    if user_data is not None:
+        user_id, stored_password = user_data
         if hashpw(password.encode('utf-8'), stored_password) == stored_password:
-            return True
+            session['user_id'] = user_id
+            return user_id
 
-    return False
+    return None
+
 
 
 def create_user(username, password):
@@ -86,12 +89,13 @@ def choose_difficulty():
     return render_template('choose_difficulty.html')
 
 
+#Difficulté
 @app.route('/game/<difficulty>')
 def game(difficulty):
     session['mot_a_deviner'] = choisir_mot(difficulty)
     session['lettres_trouvees'] = []
     session['tentatives_restantes'] = 6
-    session.pop('message_fin', None)  # Réinitialiser la variable message_fin
+    session.pop('message_fin', None)
     return render_template('game.html', difficulty=difficulty)
 
 
@@ -182,15 +186,27 @@ def jouer():
     return render_template("game.html", resultat=mot_cache, tentatives_restantes=tentatives_restantes, lettres_trouvees=lettres_trouvees, message=message)
 
 
+#Score
 @app.route("/fin-de-partie")
 def fin_de_partie():
     mot_a_deviner = session.get('mot_a_deviner', '')
     message_fin = session.get('message_fin', '')
     
+    user_id = session.get('user_id')
+    print(f"ID de l'utilisateur : {user_id}")
+
     if "_" not in afficher_mot_cache(mot_a_deviner, session.get('lettres_trouvees', [])):
         resultat = "Gagné"
+        with connect_db() as db:
+            cursor = db.cursor()
+            cursor.execute("UPDATE User SET Nb_Partie_Gagner = Nb_Partie_Gagner + 1 WHERE US_Id = ?", (user_id,))
+            print(f"Mise à jour du nombre de parties gagnées pour l'utilisateur {user_id}")
     else:
         resultat = "Perdu"
+        with connect_db() as db:
+            cursor = db.cursor()
+            cursor.execute("UPDATE User SET Nb_Partie_Perdu = Nb_Partie_Perdu + 1 WHERE US_Id = ?", (user_id,))
+            print(f"Mise à jour du nombre de parties perdues pour l'utilisateur {user_id}")
 
     return render_template("fin_de_partie.html", resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin)
 

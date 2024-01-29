@@ -210,8 +210,14 @@ def fin_de_partie():
     # Enregistrez les détails de la partie dans la table Partie
     with connect_db() as db:
         cursor = db.cursor()
-        cursor.execute("INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, User_Id) VALUES (?, ?, ?)",
-                       (Date_Du_Jeu, mot_a_deviner, user_id))
+        cursor.execute("""
+            INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen, 
+                               Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (Date_Du_Jeu, mot_a_deviner, int(difficulty == 'Facile' and resultat == 'Gagné'),
+              int(difficulty == 'Facile' and resultat == 'Perdu'), int(difficulty == 'Moyen' and resultat == 'Gagné'),
+              int(difficulty == 'Moyen' and resultat == 'Perdu'), int(difficulty == 'Difficile' and resultat == 'Gagné'),
+              int(difficulty == 'Difficile' and resultat == 'Perdu'), resultat, difficulty, user_id))
 
         # Mise à jour des statistiques de l'utilisateur
         if resultat == "Gagné":
@@ -221,6 +227,11 @@ def fin_de_partie():
         
         cursor.execute(f"UPDATE Partie SET {update_column} = {update_column} + 1 WHERE User_Id = ? AND Partie_Id = ?",
                        (user_id, cursor.lastrowid))
+
+    # Stockez les informations dans la session
+    session['resultat'] = resultat
+    session['difficulty'] = difficulty
+    session['Date_Du_Jeu'] = Date_Du_Jeu
 
     return render_template("fin_de_partie.html", resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty)
 
@@ -253,10 +264,16 @@ def historique():
     # Récupérez l'historique des parties pour l'utilisateur actuel depuis la base de données
     with connect_db() as db:
         cursor = db.cursor()
-        cursor.execute("SELECT * FROM Partie WHERE User_Id = ?", (user_id,))
+        cursor.execute("""
+            SELECT Date_Du_Jeu, Mot_A_Deviner, Resultat, Difficulty
+            FROM Partie
+            WHERE User_Id = ?
+            ORDER BY Date_Du_Jeu DESC
+        """, (user_id,))
         game_history = cursor.fetchall()
 
     return render_template('historique.html', game_history=game_history)
+
 
 
 

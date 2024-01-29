@@ -1,4 +1,5 @@
 import sqlite3
+from bcrypt import hashpw, gensalt
 
 connection = sqlite3.connect('Pendu.db')
 cursor = connection.cursor()
@@ -20,21 +21,25 @@ cursor.execute("""
 """)
 
 cursor.execute("""
-    CREATE TABLE IF NOT EXISTS Partie (
-        Partie_Id INTEGER PRIMARY KEY AUTOINCREMENT,
-        Date_Du_Jeu DATETIME DEFAULT CURRENT_TIMESTAMP,
-        Mot_A_Deviner VARCHAR,
-        Gagne_Facile INTEGER DEFAULT 0,
-        Perdu_Facile INTEGER DEFAULT 0,
-        Gagne_Moyen INTEGER DEFAULT 0,
-        Perdu_Moyen INTEGER DEFAULT 0,
-        Gagne_Difficile INTEGER DEFAULT 0,
-        Perdu_Difficile INTEGER DEFAULT 0,
-        Resultat VARCHAR DEFAULT NULL,
-        User_Id INTEGER,
-        FOREIGN KEY(User_Id) REFERENCES User(US_Id)
-    );
+CREATE TABLE IF NOT EXISTS Partie (
+    Partie_Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Date_Du_Jeu DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Mot_A_Deviner VARCHAR,
+    Gagne_Facile INTEGER DEFAULT 0,
+    Perdu_Facile INTEGER DEFAULT 0,
+    Gagne_Moyen INTEGER DEFAULT 0,
+    Perdu_Moyen INTEGER DEFAULT 0,
+    Gagne_Difficile INTEGER DEFAULT 0,
+    Perdu_Difficile INTEGER DEFAULT 0,
+    Resultat VARCHAR DEFAULT NULL,
+    Difficulty VARCHAR DEFAULT NULL,
+    User_Id INTEGER,
+    FOREIGN KEY(User_Id) REFERENCES User(US_Id)
+);
 """)
+
+connection.commit()
+
 
 #Intégrer les mots
 cursor.execute("""
@@ -245,6 +250,47 @@ cursor.execute("""
             WHEN LENGTH(Mot) BETWEEN 6 AND 9 THEN "moyen"
             ELSE "difficile"
         END
+""")
+
+# Création de l'utilisateur 'a' avec mot de passe 'a'
+hashed_password_a = hashpw('a'.encode('utf-8'), gensalt())
+cursor.execute("INSERT INTO User (Nom_Utilisateur, Mot_De_Passe) VALUES (?, ?)", ('a', hashed_password_a))
+
+# Exemples pour l'utilisateur a avec des dates différentes
+cursor.execute("""
+    INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen,
+                       Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
+    VALUES (DATETIME('now', '-7 days'), 'voiture', 0, 1, 0, 1, 0, 1, 'Perdu', 'Facile', 1)
+""")
+
+cursor.execute("""
+    INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen,
+                       Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
+    VALUES (DATETIME('now', '-5 days'), 'avion', 0, 0, 1, 1, 0, 1, 'Perdu', 'Moyen', 1)
+""")
+
+cursor.execute("""
+    INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen,
+                       Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
+    VALUES (DATETIME('now', '-3 days'), 'argent', 0, 0, 0, 0, 1, 1, 'Perdu', 'Difficile', 1)
+""")
+
+cursor.execute("""
+    INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen,
+                       Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
+    VALUES (DATETIME('now', '-2 days'), 'minuscule', 1, 0, 0, 0, 1, 0, 'Gagné', 'Difficile', 1)
+""")
+
+cursor.execute("""
+    INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen,
+                       Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
+    VALUES (DATETIME('now', '-1 day'), 'index', 1, 0, 0, 0, 0, 0, 'Gagné', 'Facile', 1)
+""")
+
+cursor.execute("""
+    INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen,
+                       Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
+    VALUES (DATETIME('now'), 'sortir', 0, 0, 1, 0, 0, 1, 'Perdu', 'Moyen', 1)
 """)
 
 connection.commit()

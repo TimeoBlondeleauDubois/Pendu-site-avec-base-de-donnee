@@ -6,7 +6,7 @@ cursor = connection.cursor()
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS User (
         US_Id INTEGER PRIMARY KEY AUTOINCREMENT,
-        Nom_Utilisateur VARCHAR UNIQUE,  -- Ajout d'UNIQUE pour créer un index
+        Nom_Utilisateur VARCHAR UNIQUE,
         Mot_De_Passe VARCHAR
 );
 """)
@@ -25,6 +25,8 @@ cursor.execute("""
         US_Id INTEGER,
         Nb_Partie_Gagner TINYINT,
         Nb_Partie_Perdu TINYINT,
+        Niveau_De_Difficulte VARCHAR,
+        Date_Du_Jeu DATETIME,
         FOREIGN KEY (US_Id) REFERENCES User(US_Id)
     );
 """)

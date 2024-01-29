@@ -208,9 +208,9 @@ cursor.execute("""
     UPDATE Liste_De_Mots
     SET Difficulty = 
         CASE 
-            WHEN LENGTH(Mot) < 6 THEN 1
-            WHEN LENGTH(Mot) BETWEEN 6 AND 9 THEN 2
-            ELSE 3
+            WHEN LENGTH(Mot) < 6 THEN "facile"
+            WHEN LENGTH(Mot) BETWEEN 6 AND 9 THEN "moyen"
+            ELSE "difficile"
         END
 """)
 

@@ -88,7 +88,7 @@ def choose_difficulty():
 
 @app.route('/game/<difficulty>')
 def game(difficulty):
-    session['mot_a_deviner'] = choisir_mot()
+    session['mot_a_deviner'] = choisir_mot(difficulty)
     session['lettres_trouvees'] = []
     session['tentatives_restantes'] = 6
     session.pop('message_fin', None)  # Réinitialiser la variable message_fin
@@ -96,14 +96,13 @@ def game(difficulty):
 
 
 
-
 #Pendu
-def choisir_mot():
+def choisir_mot(difficulty):
     with connect_db() as db:
         cursor = db.cursor()
-        cursor.execute("SELECT Mot FROM Liste_De_Mots ORDER BY RANDOM() LIMIT 1")
+        cursor.execute("SELECT Mot FROM Liste_De_Mots WHERE Difficulty = ? ORDER BY RANDOM() LIMIT 1", (difficulty,))
         mot = cursor.fetchone()
-    
+
     if mot:
         mot = mot[0].lower()
         print(f"Mot choisi : {mot}")
@@ -111,7 +110,6 @@ def choisir_mot():
     else:
         print("Aucun mot trouvé dans la base de données.")
         return None
-
 
 
 def afficher_mot_cache(mot, lettres_trouvees):

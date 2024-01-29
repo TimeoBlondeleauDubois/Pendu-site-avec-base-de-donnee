@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from bcrypt import hashpw, gensalt
-import sqlite3
-import random
+import sqlite3, random
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'b_5#y2L"F4Q8z\n\xec]/'
@@ -97,6 +97,7 @@ def game(difficulty):
     session['tentatives_restantes'] = 6
     session['difficulty'] = difficulty
     session.pop('message_fin', None)
+    session['Date_Du_Jeu'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return render_template('game.html', difficulty=difficulty)
 
 
@@ -196,27 +197,27 @@ def recommencer_une_partie():
 def fin_de_partie():
     mot_a_deviner = session.get('mot_a_deviner', '')
     message_fin = session.get('message_fin', '')
-    
     user_id = session.get('user_id')
     difficulty = session.get('difficulty', 'Facile')
-
+    
+    Date_Du_Jeu = session.get('Date_Du_Jeu', '')
+    
     if "_" not in afficher_mot_cache(mot_a_deviner, session.get('lettres_trouvees', [])):
         resultat = "Gagné"
         update_column = f'Nb_Partie_Gagner_{difficulty}'
         with connect_db() as db:
             cursor = db.cursor()
-            cursor.execute(f"UPDATE User SET {update_column} = {update_column} + 1 WHERE US_Id = ?", (user_id,))
-            print(f"Mise à jour du nombre de parties gagnées pour l'utilisateur {user_id}")
+            cursor.execute(f"UPDATE User SET {update_column} = {update_column} + 1, Date_Du_Jeu = ? WHERE US_Id = ?", (Date_Du_Jeu, user_id,))
+            print(f"Mise à jour du nombre de parties gagnées et de la date pour l'utilisateur {user_id}")
     else:
         resultat = "Perdu"
         update_column = f'Nb_Partie_Perdu_{difficulty}'
         with connect_db() as db:
             cursor = db.cursor()
-            cursor.execute(f"UPDATE User SET {update_column} = {update_column} + 1 WHERE US_Id = ?", (user_id,))
-            print(f"Mise à jour du nombre de parties perdues pour l'utilisateur {user_id}")
+            cursor.execute(f"UPDATE User SET {update_column} = {update_column} + 1, Date_Du_Jeu = ? WHERE US_Id = ?", (Date_Du_Jeu, user_id,))
+            print(f"Mise à jour du nombre de parties perdues et de la date pour l'utilisateur {user_id}")
 
     return render_template("fin_de_partie.html", resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty)
-
 
 if __name__ == "__main__":
     app.run(debug=True)

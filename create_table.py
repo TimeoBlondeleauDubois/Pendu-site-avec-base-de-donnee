@@ -30,6 +30,7 @@ cursor.execute("""
         Perdu_Moyen INTEGER DEFAULT 0,
         Gagne_Difficile INTEGER DEFAULT 0,
         Perdu_Difficile INTEGER DEFAULT 0,
+        Resultat VARCHAR DEFAULT NULL,
         User_Id INTEGER,
         FOREIGN KEY(User_Id) REFERENCES User(US_Id)
     );

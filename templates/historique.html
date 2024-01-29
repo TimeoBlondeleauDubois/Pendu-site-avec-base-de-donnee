@@ -1,0 +1,19 @@
+<!-- historique.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique des Parties</title>
+</head>
+<body>
+    <h1>Historique des Parties</h1>
+    <ul>
+        {% for game in game_history %}
+            <li>
+                Date : {{ game['Date_Du_Jeu'] }}, Résultat : {{ game['Resultat'] }}, Mot : {{ game['Mot_A_Deviner'] }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

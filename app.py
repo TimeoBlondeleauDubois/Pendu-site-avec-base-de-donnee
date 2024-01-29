@@ -248,7 +248,18 @@ def classement():
 
 @app.route('/historique')
 def historique():
-    return render_template('historique.html')
+    user_id = session.get('user_id')
+
+    # Récupérez l'historique des parties pour l'utilisateur actuel depuis la base de données
+    with connect_db() as db:
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM Partie WHERE User_Id = ?", (user_id,))
+        game_history = cursor.fetchall()
+
+    return render_template('historique.html', game_history=game_history)
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

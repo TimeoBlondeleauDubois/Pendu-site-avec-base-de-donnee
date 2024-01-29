@@ -269,13 +269,33 @@ def historique():
     with connect_db() as db:
         cursor = db.cursor()
         cursor.execute("""
-            SELECT Date_Du_Jeu, Mot_A_Deviner, Resultat, Difficulty
+            SELECT Date_Du_Jeu, Mot_A_Deviner, Resultat
             FROM Partie
-            WHERE User_Id = ?
-            ORDER BY Date_Du_Jeu DESC
+            WHERE User_Id = ? AND Difficulty = "facile"
+            ORDER BY Date_Du_Jeu DESC;
         """, (user_id,))
-        game_history = cursor.fetchall()
-    return render_template('historique.html', game_history=game_history)
+        game_history_facile = cursor.fetchall()
+
+    with connect_db() as db:
+        cursor = db.cursor()
+        cursor.execute("""
+            SELECT Date_Du_Jeu, Mot_A_Deviner, Resultat
+            FROM Partie
+            WHERE User_Id = ? AND Difficulty = "moyen"
+            ORDER BY Date_Du_Jeu DESC;
+        """, (user_id,))
+        game_history_moyen = cursor.fetchall()
+
+    with connect_db() as db:
+        cursor = db.cursor()
+        cursor.execute("""
+            SELECT Date_Du_Jeu, Mot_A_Deviner, Resultat
+            FROM Partie
+            WHERE User_Id = ? AND Difficulty = "difficile"
+            ORDER BY Date_Du_Jeu DESC;
+        """, (user_id,))
+        game_history_difficile = cursor.fetchall()
+    return render_template('historique.html', game_history_moyen=game_history_moyen, game_history_facile=game_history_facile, game_history_difficile=game_history_difficile)
 
 if __name__ == "__main__":
     app.run(debug=True)

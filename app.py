@@ -49,7 +49,6 @@ def signup():
     return render_template('signup.html', error=error)
 
 
-
 @app.route('/dashboard')
 def dashboard():
     return render_template('difficulty.html')
@@ -69,7 +68,6 @@ def check_credentials(username, password):
     return None
 
 
-
 def create_user(username, password):
     try:
         hashed_password = hashpw(password.encode('utf-8'), gensalt())
@@ -87,7 +85,6 @@ def choose_difficulty():
     if request.method == 'POST':
         difficulty = request.form['difficulty']
         return redirect(url_for('game', difficulty=difficulty))
-    return render_template('choose_difficulty.html')
 
 
 #Difficulté

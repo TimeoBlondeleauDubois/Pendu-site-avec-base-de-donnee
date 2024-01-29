@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classement</title>
+</head>
+<body>
+    <h1>Classement</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Utilisateur</th>
+                <th>Victoires Facile</th>
+                <th>Victoires Moyen</th>
+                <th>Victoires Difficile</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in classement_data %}
+                <tr>
+                    <td>{{ user[0] }}</td>
+                    <td>{{ user[1] }}</td>
+                    <td>{{ user[2] }}</td>
+                    <td>{{ user[3] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/recommencer_une_partie">Commencer une partie</a>
+</body>
+</html>

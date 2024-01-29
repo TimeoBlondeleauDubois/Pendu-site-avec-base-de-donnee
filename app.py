@@ -223,6 +223,31 @@ def fin_de_partie():
                        (user_id, cursor.lastrowid))
 
     return render_template("fin_de_partie.html", resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty)
+
+#Classement
+@app.route('/classement')
+def classement():
+    with connect_db() as db:
+        cursor = db.cursor()
+
+        cursor.execute("""
+            SELECT
+                Nom_Utilisateur,
+                SUM(Gagne_Facile) AS Victoires_Facile,
+                SUM(Gagne_Moyen) AS Victoires_Moyen,
+                SUM(Gagne_Difficile) AS Victoires_Difficile
+            FROM User
+            LEFT JOIN Partie ON User.US_Id = Partie.User_Id
+            GROUP BY Nom_Utilisateur
+        """)
+
+        classement_data = cursor.fetchall()
+
+    return render_template('classement.html', classement_data=classement_data)
+
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 

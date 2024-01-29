@@ -246,7 +246,9 @@ def classement():
     return render_template('classement.html', classement_data=classement_data)
 
 
-
+@app.route('/historique')
+def historique():
+    return render_template('historique.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

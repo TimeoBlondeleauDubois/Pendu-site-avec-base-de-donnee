@@ -302,8 +302,23 @@ def historique():
     total_parties = total_facile + total_moyen + total_difficile
     pourcentage_total = (len([game for game in game_history_facile + game_history_moyen + game_history_difficile if game[2] == "Gagné"]) / total_parties) * 100 if total_parties > 0 else 0
 
-    return render_template('historique.html', game_history_moyen=game_history_moyen, game_history_facile=game_history_facile, game_history_difficile=game_history_difficile,
-                           pourcentage_facile=pourcentage_facile, pourcentage_moyen=pourcentage_moyen, pourcentage_difficile=pourcentage_difficile, pourcentage_total=pourcentage_total)
+
+
+    total_gagne_facile = len([game for game in game_history_facile if game[2] == "Gagné"])
+    total_perdu_facile = len([game for game in game_history_facile if game[2] == "Perdu"])
+
+    total_gagne_moyen = len([game for game in game_history_moyen if game[2] == "Gagné"])
+    total_perdu_moyen = len([game for game in game_history_moyen if game[2] == "Perdu"])
+
+    total_gagne_difficile = len([game for game in game_history_difficile if game[2] == "Gagné"])
+    total_perdu_difficile = len([game for game in game_history_difficile if game[2] == "Perdu"])
+
+
+    return render_template('historique.html', game_history_moyen=game_history_moyen, game_history_facile=game_history_facile, 
+    game_history_difficile=game_history_difficile, pourcentage_facile=pourcentage_facile, pourcentage_moyen=pourcentage_moyen, 
+    pourcentage_difficile=pourcentage_difficile, pourcentage_total=pourcentage_total, total_gagne_facile=total_gagne_facile, 
+    total_perdu_facile=total_perdu_facile, total_gagne_moyen=total_gagne_moyen, total_perdu_moyen=total_perdu_moyen, 
+    total_gagne_difficile=total_gagne_difficile, total_perdu_difficile=total_perdu_difficile)
 
                   
 if __name__ == "__main__":

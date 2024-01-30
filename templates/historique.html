@@ -11,7 +11,7 @@
 
     <div class="table-container">
         <div class="table-section1">
-            <h2>Facile</h2>
+            <h3>Facile</h3>
             <table border="1">
                 <thead>
                     <tr>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="table-section2">
-            <h2>Moyen</h2>
+            <h3>Moyen</h3>
             <table border="1">
                 <thead>
                     <tr>
@@ -55,7 +55,7 @@
         </div>
 
         <div class="table-section3">
-            <h2>Difficile</h2>
+            <h3>Difficile</h3>
             <table border="1">
                 <thead>
                     <tr>
@@ -84,20 +84,28 @@
                 <tr>
                     <th>Difficulté</th>
                     <th>Pourcentage de victoires</th>
+                    <th>Nombre de parties gagnées au total</th>
+                    <th>Nombre de parties perdues au total</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Facile</td>
                     <td>{{ pourcentage_facile }}%</td>
+                    <td>{{ total_gagne_facile }}</td> 
+                    <td>{{ total_perdu_facile }}</td>  
                 </tr>
                 <tr>
                     <td>Moyen</td>
                     <td>{{ pourcentage_moyen }}%</td>
+                    <td>{{ total_gagne_moyen }}</td>  
+                    <td>{{ total_perdu_moyen }}</td>  
                 </tr>
                 <tr>
                     <td>Difficile</td>
                     <td>{{ pourcentage_difficile }}%</td>
+                    <td>{{ total_gagne_difficile }}</td> 
+                    <td>{{ total_perdu_difficile }}</td>  
                 </tr>
             </tbody>
         </table>

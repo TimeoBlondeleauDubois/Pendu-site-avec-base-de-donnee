@@ -241,7 +241,7 @@ def afficher_resultat():
     return render_template('fin_de_partie.html', resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty)
 
 
-#calculer toutes sortes de choses
+#calculer les scores, statistiques etc...
 def get_classement_data(user_id):
     with connect_db() as db:
         cursor = db.cursor()

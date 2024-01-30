@@ -243,18 +243,7 @@ def afficher_resultat():
 #Classement
 @app.route('/classement')
 def classement():
-    with connect_db() as db:
-        cursor = db.cursor()
-
-        cursor.execute("""
-            SELECT User.Nom_Utilisateur
-            FROM User
-            ORDER BY Nom_Utilisateur DESC;
-        """)
-
-        classement_data = cursor.fetchall()
-
-    return render_template('classement.html', classement_data=classement_data)
+    return render_template('classement.html')
 
 @app.route('/historique')
 def historique():

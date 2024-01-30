@@ -6,31 +6,5 @@
     <title>Classement</title>
 </head>
 <body>
-    <h1>Classement</h1>
-    <br>
-    <h2>Facile</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Nom du joueur</th>
-                <th>Pourcentage de victoires</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in classement_data %}
-                <tr>
-                    <td>{{ user[0] }}</td>
-                    <td>{{ user[1] }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <br>
-    <a href="/recommencer_une_partie">
-        <input type="button" value="commencer une partie" />
-    </a>
-    <a href="/historique">
-        <input type="button" value="Historique de vos parties" />
-    </a>
 </body>
 </html>

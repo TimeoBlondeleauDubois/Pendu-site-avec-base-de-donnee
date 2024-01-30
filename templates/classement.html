@@ -6,5 +6,23 @@
     <title>Classement</title>
 </head>
 <body>
+    <h1>Classement</h1>
+
+    <table border="1">
+        <tr>
+            <th>Position</th>
+            <th>Nom d'Utilisateur</th>
+            <th>Total Parties</th>
+            <th>Pourcentage de Victoire</th>
+        </tr>
+        {% for player in classement %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ player['nom_utilisateur'] }}</td>
+            <td>{{ player['total_parties'] }}</td>
+            <td>{{ player['pourcentage_victoire'] }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>

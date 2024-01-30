@@ -68,6 +68,7 @@ def check_credentials(username, password):
     return None
 
 
+
 def create_user(username, password):
     try:
         hashed_password = hashpw(password.encode('utf-8'), gensalt())
@@ -241,8 +242,8 @@ def afficher_resultat():
     return render_template('fin_de_partie.html', resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty)
 
 
-#calculer les scores, statistiques etc...
-def get_classement_data(user_id):
+#calculer les scores, statistiques etc... pour l'historique
+def get_historique_data(user_id):
     with connect_db() as db:
         cursor = db.cursor()
         cursor.execute("""
@@ -314,24 +315,68 @@ def get_classement_data(user_id):
         "total_perdu_difficile": total_perdu_difficile
     }
 
+#calculer les scores, statistiques etc... pour le classement
+def get_classement_data():
+    with connect_db() as db:
+        cursor = db.cursor()
+        cursor.execute("""
+            SELECT User_Id, Nom_Utilisateur
+            FROM User;
+        """)
+        users = cursor.fetchall()
+
+    classement = []
+
+    for user in users:
+        user_id = user[0]
+        nom_utilisateur = user[1]
+
+        with connect_db() as db:
+            cursor = db.cursor()
+            cursor.execute("""
+                SELECT Resultat, Difficulty
+                FROM Partie
+                WHERE User_Id = ?
+            """, (user_id,))
+            user_games = cursor.fetchall()
+
+        total_games = len(user_games)
+        if total_games > 0:
+            total_wins = len([game for game in user_games if game[0] == "Gagné"])
+            win_percentage = (total_wins / total_games) * 100
+        else:
+            win_percentage = 0
+
+        classement.append({
+            "user_id": user_id,
+            "nom_utilisateur": nom_utilisateur,
+            "total_parties": total_games,
+            "pourcentage_victoire": win_percentage
+        })
+
+    # Tri du classement par pourcentage de victoire décroissant
+    classement = sorted(classement, key=lambda x: x["pourcentage_victoire"], reverse=True)
+
+    return {"classement": classement}
+
+
 
 # Classement
 @app.route('/classement')
 def classement():
     user_id = session.get('user_id')
     classement_data = get_classement_data(user_id)
-    
     return render_template('classement.html', **classement_data)
+
 
 #Statistique + Historique de toutes les parties
 @app.route('/historique')
 def historique():
     user_id = session.get('user_id')
-    classement_data = get_classement_data(user_id)
-
-    return render_template('historique.html', **classement_data)
+    historique_data = get_historique_data(user_id)
+    return render_template('historique.html', **historique_data)
                   
 if __name__ == "__main__":
     app.run(debug=True)
-    connection.commit()
-    connection.close()
+    #connection.commit()
+    #connection.close()

@@ -240,15 +240,9 @@ def afficher_resultat():
 
     return render_template('fin_de_partie.html', resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty)
 
-#Classement
-@app.route('/classement')
-def classement():
-    return render_template('classement.html')
 
-@app.route('/historique')
-def historique():
-    user_id = session.get('user_id')
-
+#calculer toutes sortes de choses
+def get_classement_data(user_id):
     with connect_db() as db:
         cursor = db.cursor()
         cursor.execute("""
@@ -291,8 +285,6 @@ def historique():
     total_parties = total_facile + total_moyen + total_difficile
     pourcentage_total = (len([game for game in game_history_facile + game_history_moyen + game_history_difficile if game[2] == "Gagné"]) / total_parties) * 100 if total_parties > 0 else 0
 
-
-
     total_gagne_facile = len([game for game in game_history_facile if game[2] == "Gagné"])
     total_perdu_facile = len([game for game in game_history_facile if game[2] == "Perdu"])
 
@@ -302,13 +294,42 @@ def historique():
     total_gagne_difficile = len([game for game in game_history_difficile if game[2] == "Gagné"])
     total_perdu_difficile = len([game for game in game_history_difficile if game[2] == "Perdu"])
 
+    return {
+        "game_history_facile": game_history_facile,
+        "game_history_moyen": game_history_moyen,
+        "game_history_difficile": game_history_difficile,
+        "total_facile": total_facile,
+        "pourcentage_facile": pourcentage_facile,
+        "total_moyen": total_moyen,
+        "pourcentage_moyen": pourcentage_moyen,
+        "total_difficile": total_difficile,
+        "pourcentage_difficile": pourcentage_difficile,
+        "total_parties": total_parties,
+        "pourcentage_total": pourcentage_total,
+        "total_gagne_facile": total_gagne_facile,
+        "total_perdu_facile": total_perdu_facile,
+        "total_gagne_moyen": total_gagne_moyen,
+        "total_perdu_moyen": total_perdu_moyen,
+        "total_gagne_difficile": total_gagne_difficile,
+        "total_perdu_difficile": total_perdu_difficile
+    }
 
-    return render_template('historique.html', game_history_moyen=game_history_moyen, game_history_facile=game_history_facile, 
-    game_history_difficile=game_history_difficile, pourcentage_facile=pourcentage_facile, pourcentage_moyen=pourcentage_moyen, 
-    pourcentage_difficile=pourcentage_difficile, pourcentage_total=pourcentage_total, total_gagne_facile=total_gagne_facile, 
-    total_perdu_facile=total_perdu_facile, total_gagne_moyen=total_gagne_moyen, total_perdu_moyen=total_perdu_moyen, 
-    total_gagne_difficile=total_gagne_difficile, total_perdu_difficile=total_perdu_difficile)
 
+# Classement
+@app.route('/classement')
+def classement():
+    user_id = session.get('user_id')
+    classement_data = get_classement_data(user_id)
+    
+    return render_template('classement.html', **classement_data)
+
+#Statistique + Historique de toutes les parties
+@app.route('/historique')
+def historique():
+    user_id = session.get('user_id')
+    classement_data = get_classement_data(user_id)
+
+    return render_template('historique.html', **classement_data)
                   
 if __name__ == "__main__":
     app.run(debug=True)

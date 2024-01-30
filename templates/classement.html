@@ -7,14 +7,13 @@
 </head>
 <body>
     <h1>Classement</h1>
-
+    <br>
+    <h2>Facile</h2>
     <table border="1">
         <thead>
             <tr>
-                <th>Utilisateur</th>
-                <th>Victoires Facile</th>
-                <th>Victoires Moyen</th>
-                <th>Victoires Difficile</th>
+                <th>Nom du joueur</th>
+                <th>Pourcentage de victoires</th>
             </tr>
         </thead>
         <tbody>
@@ -22,8 +21,6 @@
                 <tr>
                     <td>{{ user[0] }}</td>
                     <td>{{ user[1] }}</td>
-                    <td>{{ user[2] }}</td>
-                    <td>{{ user[3] }}</td>
                 </tr>
             {% endfor %}
         </tbody>

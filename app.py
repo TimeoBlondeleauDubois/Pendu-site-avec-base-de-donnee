@@ -247,20 +247,14 @@ def classement():
         cursor = db.cursor()
 
         cursor.execute("""
-            SELECT
-                Nom_Utilisateur,
-                SUM(Gagne_Facile) AS Victoires_Facile,
-                SUM(Gagne_Moyen) AS Victoires_Moyen,
-                SUM(Gagne_Difficile) AS Victoires_Difficile
+            SELECT User.Nom_Utilisateur
             FROM User
-            LEFT JOIN Partie ON User.US_Id = Partie.User_Id
-            GROUP BY Nom_Utilisateur
+            ORDER BY Nom_Utilisateur DESC;
         """)
 
         classement_data = cursor.fetchall()
 
     return render_template('classement.html', classement_data=classement_data)
-
 
 @app.route('/historique')
 def historique():
@@ -295,10 +289,24 @@ def historique():
             ORDER BY Date_Du_Jeu DESC;
         """, (user_id,))
         game_history_difficile = cursor.fetchall()
-    return render_template('historique.html', game_history_moyen=game_history_moyen, game_history_facile=game_history_facile, game_history_difficile=game_history_difficile)
 
+    total_facile = len(game_history_facile)
+    pourcentage_facile = (len([game for game in game_history_facile if game[2] == "Gagné"]) / total_facile) * 100 if total_facile > 0 else 0
+
+    total_moyen = len(game_history_moyen)
+    pourcentage_moyen = (len([game for game in game_history_moyen if game[2] == "Gagné"]) / total_moyen) * 100 if total_moyen > 0 else 0
+
+    total_difficile = len(game_history_difficile)
+    pourcentage_difficile = (len([game for game in game_history_difficile if game[2] == "Gagné"]) / total_difficile) * 100 if total_difficile > 0 else 0
+
+    total_parties = total_facile + total_moyen + total_difficile
+    pourcentage_total = (len([game for game in game_history_facile + game_history_moyen + game_history_difficile if game[2] == "Gagné"]) / total_parties) * 100 if total_parties > 0 else 0
+
+    return render_template('historique.html', game_history_moyen=game_history_moyen, game_history_facile=game_history_facile, game_history_difficile=game_history_difficile,
+                           pourcentage_facile=pourcentage_facile, pourcentage_moyen=pourcentage_moyen, pourcentage_difficile=pourcentage_difficile, pourcentage_total=pourcentage_total)
+
+                  
 if __name__ == "__main__":
     app.run(debug=True)
     connection.commit()
     connection.close()
-

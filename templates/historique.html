@@ -7,8 +7,9 @@
         <link rel="stylesheet" href="style3.css">
     </head>
     <body>
+        <h1>Historique de vos parties:</h1>
         <div class="table-container">
-            <div class="table-section">
+            <div class="table-section1">
                 <h2>Facile</h2>
                 <table border="1">
                     <thead>
@@ -30,7 +31,7 @@
                 </table>
             </div>
 
-            <div class="table-section">
+            <div class="table-section2">
                 <h2>Moyen</h2>
                 <table border="1">
                     <thead>
@@ -52,7 +53,7 @@
                 </table>
             </div>
 
-            <div class="table-section">
+            <div class="table-section3">
                 <h2>Difficile</h2>
                 <table border="1">
                     <thead>
@@ -74,5 +75,19 @@
                 </table>
             </div>
         </div>
+        <div class="percentage-section">
+            <h1>Vos statistiques:</h1>
+            <p>Pourcentage de victoires au total: {{ pourcentage_total }}%</p>
+            <p>Pourcentage de victoires en mode facile: {{ pourcentage_facile }}%</p>
+            <p>Pourcentage de victoires en mode moyen: {{ pourcentage_moyen }}%</p>
+            <p>Pourcentage de victoires en mode difficile: {{ pourcentage_difficile }}%</p>
+            
+        </div>
+        <a href="/recommencer_une_partie">
+            <input type="button" value="commencer une partie" />
+        </a>
+        <a href="/classement">
+            <input type="button" value="Regarder le classement" />
+        </a>
     </body>
     </html>

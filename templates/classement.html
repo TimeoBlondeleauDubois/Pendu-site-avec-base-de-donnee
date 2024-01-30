@@ -4,62 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classement</title>
-    <style>
-        table {
-            width: 50%;
-            border-collapse: collapse;
-            margin: 20px;
-        }
-
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 <body>
-    <h2>Classement</h2>
-    <table>
-        <tr>
-            <th>Mode</th>
-            <th>Total de parties</th>
-            <th>Victoires</th>
-            <th>Défaites</th>
-            <th>Pourcentage de victoire</th>
-        </tr>
-        <tr>
-            <td>Facile</td>
-            <td>{{ total_facile }}</td>
-            <td>{{ total_gagne_facile }}</td>
-            <td>{{ total_perdu_facile }}</td>
-            <td>{{ pourcentage_facile }}%</td>
-        </tr>
-        <tr>
-            <td>Moyen</td>
-            <td>{{ total_moyen }}</td>
-            <td>{{ total_gagne_moyen }}</td>
-            <td>{{ total_perdu_moyen }}</td>
-            <td>{{ pourcentage_moyen }}%</td>
-        </tr>
-        <tr>
-            <td>Difficile</td>
-            <td>{{ total_difficile }}</td>
-            <td>{{ total_gagne_difficile }}</td>
-            <td>{{ total_perdu_difficile }}</td>
-            <td>{{ pourcentage_difficile }}%</td>
-        </tr>
-        <tr>
-            <td>Total</td>
-            <td>{{ total_parties }}</td>
-            <td>{{ total_gagne_facile + total_gagne_moyen + total_gagne_difficile }}</td>
-            <td>{{ total_perdu_facile + total_perdu_moyen + total_perdu_difficile }}</td>
-            <td>{{ pourcentage_total }}%</td>
-        </tr>
-    </table>
 </body>
 </html>

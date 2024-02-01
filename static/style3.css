@@ -21,8 +21,8 @@ body {
     margin: 0 10px;
 }
 
-.title-container, .table-section, .stats-container {
-    background-color: #7c3bde;
+.title-container, .stats-container {
+    background-color: #3b7ade;
     color: #ffffff;
     text-align: center;
     padding: 10px;
@@ -32,8 +32,6 @@ body {
 
 .title-container h1,
 .title-container h3,
-.table-section h1,
-.table-section h3,
 .stats-container h1,
 .stats-container h3 {
     margin: 0;
@@ -48,9 +46,6 @@ body {
 .table-section {
     text-align: center;
     width: 30%;
-    background-color: #fb9e0a;
-    border-radius: 10px;
-    padding: 10px;
 }
 
 .content-table {
@@ -116,4 +111,31 @@ body {
 
 .content-table tbody tr td {
     color: #7c3bde;
+}
+
+
+.difficulty-section {
+    background-color: #faa319;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+
+.difficulty-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.difficulty-section .section-text {
+    background-color: #3b7ade;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.difficulty-section .section-text h3 {
+    margin: 0;
 }

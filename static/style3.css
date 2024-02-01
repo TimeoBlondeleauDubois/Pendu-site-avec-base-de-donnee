@@ -8,7 +8,7 @@ h1, h3 {
 }
 
 body {
-    background-color: rgb(24, 22, 22);
+    background-color: rgb(255, 255, 255);
 }
 
 .bouton-section {
@@ -53,7 +53,7 @@ body {
     font-size: 0.9em;
     min-width: 400px;
     overflow: hidden;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -66,7 +66,7 @@ body {
 
 .content-table thead tr {
     background-color: #7c3bde;
-    color: #000000;
+    color: #ffffff;
     text-align: center;
     font-weight: bold;
     border-radius: 5px 5px 0 0;
@@ -76,12 +76,12 @@ body {
     padding: 12px 15px;
     border-right: 3px solid #7c3bde;
     text-align: center;
-    color: #000000;
+    color: #ffffff;
 }
 
 .content-table tbody tr {
     border-bottom: 3px solid #7c3bde;
-    color: #000000;
+    color: #ffffff;
 }
 
 .content-table th:last-child, .content-table td:last-child {
@@ -112,7 +112,7 @@ body {
 
 
 .difficulty-section {
-    background-color: rgb(24, 22, 22);
+    background-color: rgb(255, 255, 255);
     color: #ffffff;
     text-align: center;
     padding: 10px;

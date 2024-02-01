@@ -22,7 +22,7 @@ body {
 }
 
 .title-container {
-    background-color: #3b7ade;
+    background-color: #7c3bde;
     color: #ffffff;
     text-align: center;
     padding: 10px;
@@ -112,7 +112,7 @@ body {
 
 
 .difficulty-section {
-    background-color: #ffaa00;
+    background-color: rgb(24, 22, 22);
     color: #ffffff;
     text-align: center;
     padding: 10px;
@@ -127,7 +127,7 @@ body {
 }
 
 .difficulty-section .section-text {
-    background-color: #3b7ade;
+    background-color: #7c3bde;
     color: #ffffff;
     padding: 10px;
     border-radius: 5px;
@@ -141,3 +141,4 @@ body {
     max-width: 225px;
     margin: 0 auto;
 }
+

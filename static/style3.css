@@ -2,22 +2,29 @@
     font-family: sans-serif;
 }
 
-h1 {
+h1, h3 {
     text-align: center;
 }
-
-h3 {
-    text-align: center;
-}
-
 
 .bouton-section {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 }
 
 .bouton-section a {
-    margin: 0 2px;
+    margin: 0 10px;
+}
+
+.table-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.table-section {
+    text-align: center;
+    width: 30%;
 }
 
 .content-table {
@@ -31,6 +38,9 @@ h3 {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    max-width: 1450px;
+    margin: 25px auto;
 }
 
 .content-table thead tr {

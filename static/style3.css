@@ -6,6 +6,11 @@ h1, h3 {
     text-align: center;
 }
 
+body {
+    background: url(Geometry_Dash_Art_4.png) no-repeat center center fixed;
+    background-size: cover;
+}
+
 .bouton-section {
     display: flex;
     justify-content: center;
@@ -32,7 +37,6 @@ h1, h3 {
     margin: 25px 0;
     font-size: 0.9em;
     min-width: 400px;
-    border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     flex-direction: row;
@@ -41,17 +45,28 @@ h1, h3 {
     width: 100%;
     max-width: 1450px;
     margin: 25px auto;
+    background: rgba(255, 255, 255, 0.9); /* Ajouter une couleur de fond non transparente au tableau */
+    border-radius: 5px; /* Ajouter un arrondi aux coins du tableau */
 }
 
 .content-table thead tr {
     background-color: #7c3bde;
     color: #ffffff;
-    text-align: left;
+    text-align: center;
     font-weight: bold;
+    border-radius: 5px 5px 0 0;
 }
 
-.content-table th, .content-table td {
+.content-table th,
+.content-table td {
     padding: 12px 15px;
+    border-right: 3px solid #7c3bde;
+    text-align: center;
+}
+
+.content-table th:last-child,
+.content-table td:last-child {
+    border-right: none;
 }
 
 .content-table tbody tr {
@@ -63,7 +78,8 @@ h1, h3 {
 }
 
 .content-table tbody tr:last-of-type {
-    border-bottom: 2px solid #7c3bde;
+    border-bottom: 3px solid #7c3bde;
+    border-radius: 0 0 10px 10px;
 }
 
 .content-table tbody tr.active-row {

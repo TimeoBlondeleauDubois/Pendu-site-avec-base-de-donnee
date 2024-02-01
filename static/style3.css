@@ -4,11 +4,11 @@
 
 h1, h3 {
     text-align: center;
+    color: #ffffff;
 }
 
 body {
-    background: url(Geometry_Dash_Art_4.png) no-repeat center center fixed;
-    background-size: cover;
+    background-color: rgb(24, 22, 22);
 }
 
 .bouton-section {
@@ -38,30 +38,37 @@ body {
     font-size: 0.9em;
     min-width: 400px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 1450px;
     margin: 25px auto;
-    background: rgba(255, 255, 255, 0.9); /* Ajouter une couleur de fond non transparente au tableau */
-    border-radius: 5px; /* Ajouter un arrondi aux coins du tableau */
+    background: #ffffff;
+    border-radius: 5px;
 }
 
 .content-table thead tr {
-    background-color: #7c3bde;
-    color: #ffffff;
+    background-color: #7c3bde; 
+    color: #000000; 
     text-align: center;
     font-weight: bold;
     border-radius: 5px 5px 0 0;
 }
+
 
 .content-table th,
 .content-table td {
     padding: 12px 15px;
     border-right: 3px solid #7c3bde;
     text-align: center;
+    color: #000000;
+}
+
+.content-table tbody tr {
+    border-bottom: 3px solid #7c3bde;
+    color: #000000; 
 }
 
 .content-table th:last-child,
@@ -69,12 +76,8 @@ body {
     border-right: none;
 }
 
-.content-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
 .content-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+    background-color: #ffffff;
 }
 
 .content-table tbody tr:last-of-type {
@@ -86,3 +89,12 @@ body {
     font-weight: bold;
     color: #7c3bde;
 }
+
+.content-table thead tr th {
+    color: #ffffff;
+}
+
+.content-table tbody tr td {
+    color: #7c3bde;
+}
+

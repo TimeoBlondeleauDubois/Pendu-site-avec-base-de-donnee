@@ -20,7 +20,6 @@ def connect_db():
     print(f"Connecté à la base de données : {db_path}")
     return sqlite3.connect(db_path)
 
-
 #Utilisateur
 @app.route('/login', methods=['GET', 'POST'])
 def login():

@@ -21,19 +21,18 @@ body {
     margin: 0 10px;
 }
 
-.title-container, .stats-container {
+.title-container {
     background-color: #3b7ade;
     color: #ffffff;
     text-align: center;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 20px;
+    max-width: 425px;
+    margin: 0 auto;
 }
 
-.title-container h1,
-.title-container h3,
-.stats-container h1,
-.stats-container h3 {
+.title-container h1, .title-container h3{
     margin: 0;
 }
 
@@ -73,8 +72,7 @@ body {
     border-radius: 5px 5px 0 0;
 }
 
-.content-table th,
-.content-table td {
+.content-table th, .content-table td {
     padding: 12px 15px;
     border-right: 3px solid #7c3bde;
     text-align: center;
@@ -86,8 +84,7 @@ body {
     color: #000000;
 }
 
-.content-table th:last-child,
-.content-table td:last-child {
+.content-table th:last-child, .content-table td:last-child {
     border-right: none;
 }
 
@@ -115,7 +112,7 @@ body {
 
 
 .difficulty-section {
-    background-color: #faa319;
+    background-color: #ffaa00;
     color: #ffffff;
     text-align: center;
     padding: 10px;
@@ -138,4 +135,9 @@ body {
 
 .difficulty-section .section-text h3 {
     margin: 0;
+}
+
+.section-text {
+    max-width: 225px;
+    margin: 0 auto;
 }

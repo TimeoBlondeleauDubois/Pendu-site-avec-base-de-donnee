@@ -20,7 +20,7 @@ def connect_db():
     print(f"Connecté à la base de données : {db_path}")
     return sqlite3.connect(db_path)
 
-#Utilisateur
+#Se connecter
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
@@ -47,7 +47,7 @@ def signup():
             error = 'Nom d\'utilisateur déjà pris'
     return render_template('signup.html', error=error)
 
-
+#Dashboard
 @app.route('/dashboard')
 def dashboard():
     return render_template('difficulty.html')
@@ -67,7 +67,7 @@ def check_credentials(username, password):
     return None
 
 
-
+#Creer un joueur
 def create_user(username, password):
     try:
         hashed_password = hashpw(password.encode('utf-8'), gensalt())
@@ -125,7 +125,7 @@ def afficher_mot_cache(mot, lettres_trouvees):
             mot_cache += "_"
     return mot_cache
 
-
+#Pendu1
 @app.route("/pendu")
 def index():
     if 'mot_a_deviner' not in session:
@@ -146,7 +146,7 @@ def index():
     session.pop('message_fin', None)
     return render_template("game.html", resultat=mot_cache, tentatives_restantes=tentatives_restantes, lettres_trouvees=lettres_trouvees, message="")
 
-
+#Pendu2
 @app.route("/jouer", methods=["POST"])
 def jouer():
     if 'mot_a_deviner' not in session:
@@ -241,8 +241,10 @@ def afficher_resultat():
     return render_template('fin_de_partie.html', resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty)
 
 
-#calculer les scores, statistiques etc... pour l'historique
+#Historique et statistique
 def get_historique_data(user_id):
+
+    #Historique
     with connect_db() as db:
         cursor = db.cursor()
         cursor.execute("""
@@ -273,6 +275,7 @@ def get_historique_data(user_id):
         """, (user_id,))
         game_history_difficile = cursor.fetchall()
 
+    #Statistique
     total_facile = len(game_history_facile)
     pourcentage_facile = (len([game for game in game_history_facile if game[2] == "Gagné"]) / total_facile) * 100 if total_facile > 0 else 0
 
@@ -314,7 +317,7 @@ def get_historique_data(user_id):
         "total_perdu_difficile": total_perdu_difficile
     }
 
-#calculer les scores, statistiques etc... pour le classement
+#Classement
 def get_classement_data(sort_key):
 
     #Cas ou total est coché (de base)

@@ -26,16 +26,23 @@
                             Pourcentage de victoire total
                             <button type="submit" name="sort_key" value="victoire_desc">⬇️</button>
                         </th>
+                        <th>
+                            <button type="submit" name="sort_key" value="nombre_de_victoire_total_asc">⬆️</button>
+                            Nombre de victoires total
+                            <button type="submit" name="sort_key" value="nombre_de_victoire_total_desc">⬇️</button>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for user, pourcentage in classement_data %}
+                    {% for user, pourcentage, nombre_de_victoire_total_desc in classement_data %}
                     <tr>
                         <td>{{ user }}</td>
                         <td>{{ pourcentage }}%</td>
+                        <td>{{ nombre_de_victoire_total_desc }}</td>
                     </tr>
                     {% endfor %}
-                </tbody>                
+                </tbody>
+                              
             </table>
         </form>
     </div>
@@ -46,6 +53,10 @@
         </a>
         <a href="/historique">
             <input type="button" value="Regarder l'historique de vos parties et vos statistiques" />
+        </a>
+        <br>
+        <a href="/">
+            <input type="button" value="Choisir un autre compte" />
         </a>
     </div>
 </body>

@@ -321,7 +321,8 @@ def get_classement_data(sort_key):
         if sort_key == 'nom_asc':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires
+                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    (SUM(Gagne_Facile)+SUM(Gagne_Moyen)+SUM(Gagne_Difficile)) as Victoires_total
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
                 GROUP BY Nom_Utilisateur
@@ -330,7 +331,8 @@ def get_classement_data(sort_key):
         elif sort_key == 'nom_desc':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires
+                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    (SUM(Gagne_Facile)+SUM(Gagne_Moyen)+SUM(Gagne_Difficile)) as Victoires_total
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
                 GROUP BY Nom_Utilisateur
@@ -339,7 +341,8 @@ def get_classement_data(sort_key):
         elif sort_key == 'victoire_asc':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires
+                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    (SUM(Gagne_Facile)+SUM(Gagne_Moyen)+SUM(Gagne_Difficile)) as Victoires_total
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
                 GROUP BY Nom_Utilisateur
@@ -348,12 +351,112 @@ def get_classement_data(sort_key):
         elif sort_key == 'victoire_desc':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires
+                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    (SUM(Gagne_Facile)+SUM(Gagne_Moyen)+SUM(Gagne_Difficile)) as Victoires_total
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
                 GROUP BY Nom_Utilisateur
                 ORDER BY Pourcentage_Victoires ASC;
             """)
+        elif sort_key == 'nombre_de_victoire_total_facile_asc':
+            cursor.execute("""
+                SELECT Nom_Utilisateur, 
+                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    SUM(Gagne_Facile) as Victoires_Faciles
+                FROM 
+                    Partie
+                JOIN 
+                    User ON Partie.User_Id = User.US_Id
+                GROUP BY 
+                    User.Nom_Utilisateur
+                ORDER BY 
+                    Victoires_Faciles DESC;
+            """)
+        elif sort_key == 'nombre_de_victoire_total_facile_desc':
+            cursor.execute("""
+                SELECT Nom_Utilisateur, 
+                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    SUM(Gagne_Facile) as Victoires_Faciles
+                FROM 
+                    Partie
+                JOIN 
+                    User ON Partie.User_Id = User.US_Id
+                GROUP BY 
+                    User.Nom_Utilisateur
+                ORDER BY 
+                    Victoires_Faciles ASC;
+            """)
+        elif sort_key == 'nombre_de_victoire_total_moyen_asc':
+            cursor.execute("""
+                SELECT Nom_Utilisateur, 
+                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    SUM(Gagne_Moyen) as Victoires_Moyen
+                FROM 
+                    Partie
+                JOIN 
+                    User ON Partie.User_Id = User.US_Id
+                GROUP BY 
+                    User.Nom_Utilisateur
+                ORDER BY 
+                    Victoires_Moyen DESC;
+            """)
+        elif sort_key == 'nombre_de_victoire_total_moyen_desc':
+            cursor.execute("""
+                SELECT Nom_Utilisateur, 
+                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    SUM(Gagne_Moyen) as Victoires_Moyen
+                FROM 
+                    Partie
+                JOIN 
+                    User ON Partie.User_Id = User.US_Id
+                GROUP BY 
+                    User.Nom_Utilisateur
+                ORDER BY 
+                    Victoires_Moyen ASC;
+            """)
+        elif sort_key == 'nombre_de_victoire_total_difficile_desc':
+            cursor.execute("""
+                SELECT Nom_Utilisateur, 
+                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    SUM(Gagne_Difficile) as Victoires_Difficile
+                FROM 
+                    Partie
+                JOIN 
+                    User ON Partie.User_Id = User.US_Id
+                GROUP BY 
+                    User.Nom_Utilisateur
+                ORDER BY 
+                    Victoires_Difficile ASC;
+            """)
+        elif sort_key == 'nombre_de_victoire_total_desc':
+            cursor.execute("""
+                SELECT Nom_Utilisateur, 
+                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    (SUM(Gagne_Facile)+SUM(Gagne_Moyen)+SUM(Gagne_Difficile)) as Victoires_total
+                FROM 
+                    Partie
+                JOIN 
+                    User ON Partie.User_Id = User.US_Id
+                GROUP BY 
+                    User.Nom_Utilisateur
+                ORDER BY 
+                    Victoires_total ASC;
+            """)
+        elif sort_key == 'nombre_de_victoire_total_asc':
+            cursor.execute("""
+                SELECT Nom_Utilisateur, 
+                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    (SUM(Gagne_Facile)+SUM(Gagne_Moyen)+SUM(Gagne_Difficile)) as Victoires_total
+                FROM 
+                    Partie
+                JOIN 
+                    User ON Partie.User_Id = User.US_Id
+                GROUP BY 
+                    User.Nom_Utilisateur
+                ORDER BY 
+                    Victoires_total DESC;
+            """)
+
 
         classement_data = cursor.fetchall()
 
@@ -362,9 +465,10 @@ def get_classement_data(sort_key):
 
 @app.route('/classement', methods=['GET', 'POST'])
 def classement():
-    sort_key = request.form.get('sort_key', 'nom_asc') #Par défaut
+    sort_key = request.form.get('sort_key', 'nom_asc') # Par défaut
     classement_data = get_classement_data(sort_key)
     return render_template('classement.html', classement_data=classement_data, sort_key=sort_key)
+
 
 
 

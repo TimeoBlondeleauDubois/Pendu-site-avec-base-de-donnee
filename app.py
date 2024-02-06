@@ -319,52 +319,62 @@ def get_classement_data():
     with connect_db() as db:
         cursor = db.cursor()
         cursor.execute("""
-            SELECT User_Id, Nom_Utilisateur
-            FROM User;
+            SELECT Nom_Utilisateur, 
+                   SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires
+            FROM Partie
+            JOIN User ON Partie.User_Id = User.US_Id
+            GROUP BY Nom_Utilisateur
+            ORDER BY Nom_Utilisateur ASC;
         """)
-        users = cursor.fetchall()
+        classement_data_nom_utilisateur_asc = cursor.fetchall()
 
-    classement = []
+    with connect_db() as db:
+        cursor = db.cursor()
+        cursor.execute("""
+            SELECT Nom_Utilisateur, 
+                   SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires
+            FROM Partie
+            JOIN User ON Partie.User_Id = User.US_Id
+            GROUP BY Nom_Utilisateur
+            ORDER BY Nom_Utilisateur DESC;
+        """)
+        classement_data_nom_utilisateur_desc = cursor.fetchall()
 
-    for user in users:
-        user_id = user[0]
-        nom_utilisateur = user[1]
+    with connect_db() as db:
+        cursor = db.cursor()
+        cursor.execute("""
+            SELECT Nom_Utilisateur, 
+                   SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires
+            FROM Partie
+            JOIN User ON Partie.User_Id = User.US_Id
+            GROUP BY Nom_Utilisateur
+            ORDER BY Pourcentage_Victoires DESC;
+        """)
+        classement_data_pourcentage_de_victoire_asc = cursor.fetchall()
 
-        with connect_db() as db:
-            cursor = db.cursor()
-            cursor.execute("""
-                SELECT Resultat, Difficulty
-                FROM Partie
-                WHERE User_Id = ?
-            """, (user_id,))
-            user_games = cursor.fetchall()
+    with connect_db() as db:
+        cursor = db.cursor()
+        cursor.execute("""
+            SELECT Nom_Utilisateur, 
+                SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires
+            FROM Partie
+            JOIN User ON Partie.User_Id = User.US_Id
+            GROUP BY Nom_Utilisateur
+            ORDER BY Pourcentage_Victoires ASC;
+    """)
+    classement_data_pourcentage_de_victoire_desc = cursor.fetchall()
 
-        total_games = len(user_games)
-        if total_games > 0:
-            total_wins = len([game for game in user_games if game[0] == "Gagné"])
-            win_percentage = (total_wins / total_games) * 100
-        else:
-            win_percentage = 0
-
-        classement.append({
-            "user_id": user_id,
-            "nom_utilisateur": nom_utilisateur,
-            "total_parties": total_games,
-            "pourcentage_victoire": win_percentage
-        })
-
-    # Tri du classement par pourcentage de victoire décroissant
-    classement = sorted(classement, key=lambda x: x["pourcentage_victoire"], reverse=True)
-
-    return {"classement": classement}
-
-
+    return {
+        "classement_data_nom_utilisateur_asc": classement_data_nom_utilisateur_asc,
+        "classement_data_nom_utilisateur_desc": classement_data_nom_utilisateur_desc,
+        "classement_data_pourcentage_de_victoire_asc": classement_data_pourcentage_de_victoire_asc,
+        "classement_data_pourcentage_de_victoire_desc": classement_data_pourcentage_de_victoire_desc
+    }
 
 # Classement
 @app.route('/classement')
 def classement():
-    user_id = session.get('user_id')
-    classement_data = get_classement_data(user_id)
+    classement_data = get_classement_data()
     return render_template('classement.html', **classement_data)
 
 

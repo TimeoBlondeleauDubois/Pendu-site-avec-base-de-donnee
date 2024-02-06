@@ -17,9 +17,6 @@ body {
     margin-top: 20px;
 }
 
-.bouton-section a {
-    margin: 0 10px;
-}
 
 .title-container {
     background-color: #7c3bde;
@@ -42,23 +39,18 @@ body {
     margin-bottom: 20px;
 }
 
-.table-section {
-    text-align: center;
-    width: 30%;
-}
-
 .content-table {
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
     min-width: 400px;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 10px #000000;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1450px;
+    max-width: 1450px;  
     margin: 25px auto;
     background: #ffffff;
     border-radius: 5px;
@@ -88,38 +80,9 @@ body {
     border-right: none;
 }
 
-.content-table tbody tr:nth-of-type(even) {
-    background-color: #ffffff;
-}
-
-.content-table tbody tr:last-of-type {
-    border-bottom: 3px solid #7c3bde;
-    border-radius: 0 0 10px 10px;
-}
-
-.content-table tbody tr.active-row {
-    font-weight: bold;
-    color: #7c3bde;
-}
-
-.content-table thead tr th {
-    color: #ffffff;
-}
-
 .content-table tbody tr td {
     color: #7c3bde;
 }
-
-
-.difficulty-section {
-    background-color: rgb(255, 255, 255);
-    color: #ffffff;
-    text-align: center;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
 
 .difficulty-section {
     text-align: center;

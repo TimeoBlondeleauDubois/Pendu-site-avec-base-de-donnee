@@ -607,11 +607,26 @@ def get_classement_data(sort_key):
     return classement_data
 
 
-@app.route('/classement', methods=['GET', 'POST'])
-def classement():
-    sort_key = request.form.get('sort_key', 'nom_asc_total') # Par défaut
+@app.route('/classement_total', methods=['GET', 'POST'])
+def classement_total():
+    sort_key = request.form.get('sort_key', 'nom_asc_total') #Par défaut
     classement_data = get_classement_data(sort_key)
-    return render_template('classement.html', classement_data=classement_data, sort_key=sort_key)
+    return render_template('classement_total.html', classement_data=classement_data, sort_key=sort_key)
+@app.route('/classement_facile', methods=['GET', 'POST'])
+def classement_facile():
+    sort_key = request.form.get('sort_key', 'nom_asc_facile')
+    classement_data = get_classement_data(sort_key)
+    return render_template('classement_facile.html', classement_data=classement_data, sort_key=sort_key)
+@app.route('/classement_moyen', methods=['GET', 'POST'])
+def classement_moyen():
+    sort_key = request.form.get('sort_key', 'nom_asc_moyen') 
+    classement_data = get_classement_data(sort_key)
+    return render_template('classement_moyen.html', classement_data=classement_data, sort_key=sort_key)
+@app.route('/classement_difficile', methods=['GET', 'POST'])
+def classement_difficile():
+    sort_key = request.form.get('sort_key', 'nom_asc_difficile') 
+    classement_data = get_classement_data(sort_key)
+    return render_template('classement_difficile.html', classement_data=classement_data, sort_key=sort_key)
 
 
 #Statistique + Historique de toutes les parties

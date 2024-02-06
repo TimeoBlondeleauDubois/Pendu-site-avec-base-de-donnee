@@ -1,0 +1,160 @@
+* {
+    font-family: sans-serif;
+}
+
+a {
+    display: inline-block;
+    background-color: #7c3bde; 
+    color: #ffffff; 
+    padding: 10px 20px;
+    text-decoration: none; 
+    border-radius: 5px; 
+    transition: background-color 0.3s; 
+}
+
+a:hover {
+    background-color: #6a2ea9;
+}
+
+
+a input[type="button"] {
+    border: none;
+    background: none;
+    color: inherit;
+    padding: 0;
+    cursor: pointer; 
+    font: inherit; 
+}
+
+h1, h3 {
+    text-align: center;
+    color: #ffffff;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+}
+
+.bouton-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+.title-container {
+    background-color: #7c3bde;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    max-width: 425px;
+    margin: 0 auto;
+}
+
+.title-container h1, .title-container h3{
+    margin: 0;
+}
+
+.table-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.content-table th,
+.content-table td {
+    padding: 12px 15px;
+    border-right: 3px solid #7c3bde;
+    border-left: 3px solid #7c3bde;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 0 0 -5px -5px;
+}
+
+
+.content-table tbody tr {
+    border-bottom: 3px solid #7c3bde;
+    color: #ffffff;
+}
+
+.content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    overflow: hidden;
+    /* box-shadow: 0 0 10px #000000; */
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1450px;
+    margin: 25px auto;
+    background: #ffffff;
+    border-radius: 10px; 
+    border: 3px solid #7c3bde; 
+}
+
+.content-table thead tr {
+    background-color: #7c3bde;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+}
+
+
+.content-table {
+    box-shadow: inset 0 0 0 3px #7c3bde;
+}
+
+
+.content-table tbody tr td {
+    color: #7c3bde;
+}
+
+.difficulty-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.difficulty-section .section-text {
+    background-color: #7c3bde;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.difficulty-section .section-text h3 {
+    margin: 0;
+}
+
+.section-text {
+    max-width: 225px;
+    margin: 0 auto;
+}
+
+
+button {
+    border: none;
+    background: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+/* CSS */
+
+/* Ajoutez ces règles pour ajuster l'espacement entre le tableau et les boutons */
+.table-section {
+    margin-top: 0px; /* Réduit l'espace en bas du tableau */
+}
+
+.bouton-section {
+    margin-top: 10px; /* Réduit l'espace en haut des boutons */
+}
+
+

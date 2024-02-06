@@ -4,26 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classement des joueurs</title>
-    <link rel="stylesheet" href="/static/style3.css">
-    <link rel="stylesheet" href="/static/style3.css">
+    <link rel="stylesheet" href="/static/style4.css">
 </head>
 <body>
-    <a href="/classement_total">
-        <input type="button" value="Tous" />
-    </a>
-    <a href="/classement_facile">
-        <input type="button" value="Facile" />
-    </a>
-    <a href="/classement_moyen">
-        <input type="button" value="Moyen" />
-    </a>
-    <a href="/classement_difficile">
-        <input type="button" value="Difficile" />
-    </a>
     <div class="title-container">
         <h1>Classement des joueurs:</h1>
     </div>
     <br>
+    <div class="bouton-section">
+        <a href="/classement_total">
+            <input type="button" value="Tous" />
+        </a>
+        <a href="/classement_facile">
+            <input type="button" value="Facile" />
+        </a>
+        <a href="/classement_moyen">
+            <input type="button" value="Moyen" />
+        </a>
+        <a href="/classement_difficile">
+            <input type="button" value="Difficile" />
+        </a>
+    </div>
     <div class="table-section difficulty-section">
     <form action="/classement_facile" method="post">
         <table class="content-table">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historique</title>
+    <title>Classement des joueurs</title>
     <link rel="stylesheet" href="/static/style3.css">
 </head>
 <body>
@@ -11,16 +11,25 @@
         <h1>Classement des joueurs:</h1>
     </div>
     <br>
-        <div class="table-section difficulty-section">
+    <div class="table-section difficulty-section">
+        <form action="/classement" method="post">
             <table class="content-table">
                 <thead>
                     <tr>
-                        <th>Nom des joueurs</th>
-                        <th>Pourcentage de victoire total</th>
+                        <th>
+                            <button type="submit" name="sort_key" value="nom_asc">⬆️</button>
+                            Nom des joueurs
+                            <button type="submit" name="sort_key" value="nom_desc">⬇️</button>
+                        </th>
+                        <th>
+                            <button type="submit" name="sort_key" value="victoire_asc">⬆️</button>
+                            Pourcentage de victoire total
+                            <button type="submit" name="sort_key" value="victoire_desc">⬇️</button>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for user, pourcentage in classement_data_nom_utilisateur_asc %}
+                    {% for user, pourcentage in classement_data %}
                     <tr>
                         <td>{{ user }}</td>
                         <td>{{ pourcentage }}%</td>
@@ -28,11 +37,12 @@
                     {% endfor %}
                 </tbody>                
             </table>
-        </div>
+        </form>
+    </div>
     <br>
     <div class="bouton-section">
         <a href="/recommencer_une_partie">
-            <input type="button" value="commencer une partie" />
+            <input type="button" value="Commencer une partie" />
         </a>
         <a href="/historique">
             <input type="button" value="Regarder l'historique de vos parties et vos statistiques" />
@@ -40,4 +50,3 @@
     </div>
 </body>
 </html>
-

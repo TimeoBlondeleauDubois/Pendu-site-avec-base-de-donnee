@@ -21,7 +21,7 @@ function toggleTable(idTableau, idArrow) {
 
 function toggleArrow(idArrow) {
     var arrow = document.getElementById(idArrow);
-    arrow.textContent = arrow.textContent.includes('⬇️') ? arrow.textContent.replace('⬇️', '⬆️') : arrow.textContent.replace('⬆️', '⬇️');
+    arrow.textContent = arrow.textContent.includes('⬆️') ? arrow.textContent.replace('⬆️', '⬇️') : arrow.textContent.replace('⬇️', '⬆️');
 }
 
 document.getElementById('facile-arrow').addEventListener('click', function() {

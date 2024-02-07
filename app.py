@@ -85,6 +85,8 @@ def choose_difficulty():
     if request.method == 'POST':
         difficulty = request.form['difficulty']
         return redirect(url_for('game', difficulty=difficulty))
+    else:
+        return render_template('difficulty.html')
 
 
 #Difficulté
@@ -96,8 +98,13 @@ def game(difficulty):
     session['difficulty'] = difficulty
     session.pop('message_fin', None)
     session['Date_Du_Jeu'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    return render_template('game.html', difficulty=difficulty)
 
+    resultat = afficher_mot_cache(session['mot_a_deviner'], session['lettres_trouvees'])
+    message = "" #Pour mettre un message
+    tentatives_restantes = session['tentatives_restantes']
+    lettres_trouvees = session['lettres_trouvees']
+
+    return render_template('game.html', resultat=resultat, message=message, tentatives_restantes=tentatives_restantes, lettres_trouvees=lettres_trouvees)
 
 
 #Pendu

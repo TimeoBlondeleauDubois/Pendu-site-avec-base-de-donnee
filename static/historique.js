@@ -35,3 +35,21 @@ document.querySelector('.table-section:nth-child(3) .title-container2').addEvent
         masquerTableau('table_difficile');
     }
 });
+
+// Détecter le clic sur le titre "Facile" et basculer la direction de la flèche
+document.getElementById('facile-arrow').addEventListener('click', function() {
+    var arrow = document.getElementById(facile-arrow);
+    arrow.textContent = arrow.textContent === 'Facile: ⬇️' ? 'Facile:⬆️' : 'Facile:⬇️';
+});
+
+// Détecter le clic sur le titre "Moyen" et basculer la direction de la flèche
+document.getElementById('moyen-arrow').addEventListener('click', function() {
+    var arrow = document.getElementById(moyen-arrow);
+    arrow.textContent = arrow.textContent === 'Moyen: ⬇️' ? 'Moyen:⬆️' : 'Moyen:⬇️';
+});
+
+// Détecter le clic sur le titre "Difficile" et basculer la direction de la flèche
+document.getElementById('difficile-arrow').addEventListener('click', function() {
+    var arrow = document.getElementById(difficile-arrow);
+    arrow.textContent = arrow.textContent === 'Difficile: ⬇️' ? 'Difficile:⬆️' : 'Difficile:⬇️';
+});

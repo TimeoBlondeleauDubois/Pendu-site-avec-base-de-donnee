@@ -232,3 +232,10 @@ button:hover {
 .section-text {
     max-width: 200px;
 }
+
+.title-container2:hover {
+    background-color: #99dd22;
+    cursor: pointer;
+}
+
+

@@ -203,7 +203,19 @@ button:hover {
     background-color: #99dd22;
     text-shadow: 8px 8px 20px rgba(0, 0, 0, 2);
 }
-  
+
+.bouton-recommencer:hover,
+.bouton-historique:hover,
+.bouton-autre_compte:hover {
+    padding: 14px 36px;
+}
+
+.bouton-recommencer,
+.bouton-historique,
+.bouton-autre_compte {
+    transition: padding 0.3s ease;
+}
+
 .bouton-recommencer,
 .bouton-historique {
     background-color: #a1582c; 
@@ -236,5 +248,12 @@ button:hover {
     border: 3px solid white;
     font-weight: bold;
     text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.75);
+    transition: padding 0.3s ease;
 }
 
+.bouton-tous:hover,
+.bouton-facile:hover,
+.bouton-moyen:hover,
+.bouton-difficile:hover {
+    padding: 11px 36px;
+}

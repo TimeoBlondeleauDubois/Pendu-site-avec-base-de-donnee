@@ -34,13 +34,18 @@ body {
     background-color: #995522;
     color: #ffffff;
     text-align: center;
-    padding: 0px 0px;
+    padding: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
-    max-width: 100px; 
+    max-width: 120px; 
     margin: auto; 
     border: 3px solid white; 
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    transition: max-width 0.5s ease;
+}
+
+.title-container2:hover {
+    max-width: 105px;
 }
 
 .title-container h1, 
@@ -239,3 +244,18 @@ button:hover {
 }
 
 
+.bouton-recommencer,
+.bouton-historique,
+.bouton-autre_compte {
+    padding: 11px 30px; 
+    cursor: pointer; 
+    font: inherit; 
+    border-radius: 15px;
+    transition: padding 0.3s ease;
+}
+
+.bouton-recommencer:hover,
+.bouton-historique:hover,
+.bouton-autre_compte:hover {
+    padding: 12px 36px;
+}

@@ -2,26 +2,6 @@
     font-family: sans-serif;
 }
 
-button {
-    border: none;
-    background: none;
-    color: inherit;
-    padding: 15px 30px; 
-    cursor: pointer; 
-    font: inherit; 
-    border-radius: 15px;
-    transition: background-color 0.3s;
-}
-
-.content-table th button,
-.content-table td button {
-    padding: 5px;
-}
-
-button:hover {
-    background-color: #7c3bde;
-}
-
 h1, h3 {
     text-align: center;
     color: #ffffff;
@@ -48,7 +28,8 @@ body {
     margin: 0 auto;
 }
 
-.title-container h1, .title-container h3{
+.title-container h1, 
+.title-container h3{
     margin: 0;
 }
 
@@ -88,6 +69,7 @@ body {
     background: #ffffff;
     border-radius: 10px; 
     border: 3px solid #7c3bde; 
+    table-layout: fixed;
 }
 
 .content-table thead tr {
@@ -111,14 +93,16 @@ body {
     margin-bottom: 20px;
 }
 
-.difficulty-section .section-text {
+.difficulty-section 
+.section-text {
     background-color: #7c3bde;
     color: #ffffff;
     padding: 10px;
     border-radius: 5px;
 }
 
-.difficulty-section .section-text h3 {
+.difficulty-section 
+.section-text h3 {
     margin: 0;
 }
 
@@ -128,9 +112,102 @@ body {
 }
 
 .table-section {
-    margin-top: -41px;
+    margin-top: -27px;
 }
 
 .bouton-section {
     margin-top: 0px;
+}
+
+button {
+    border: none;
+    background: none;
+    color: inherit;
+    padding: 11px 30px; 
+    cursor: pointer; 
+    font: inherit; 
+    border-radius: 15px 15px 0 0;
+    transition: background-color 0.3s;
+}
+
+.bouton-section a:not(:last-child) {
+    margin-right: 10px;
+}
+
+.content-table th button,
+.content-table td button {
+    padding: 5px;
+}
+
+button:hover {
+    background-color: #7c3bde;
+}
+
+.bouton-recommencer {
+    border: none;
+    background: none;
+    color: inherit;
+    padding: 11px 30px; 
+    cursor: pointer; 
+    font: inherit; 
+    border-radius: 15px;
+    transition: background-color 0.3s;
+}
+
+.bouton-historique {
+    border: none;
+    background: none;
+    color: inherit;
+    padding: 11px 30px; 
+    cursor: pointer; 
+    font: inherit; 
+    border-radius: 15px;
+    transition: background-color 0.3s;
+}
+
+.bouton-autre_compte {
+    border: none;
+    background: none;
+    color: white;
+    padding: 11px 30px; 
+    cursor: pointer; 
+    font: inherit; 
+    border-radius: 15px;
+    transition: background-color 0.3s;
+}
+
+
+.bouton-section2 {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.bouton-section2 a:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.bouton-recommencer:hover,
+.bouton-historique:hover {
+    background-color: #6a2ea9;
+}
+  
+.bouton-recommencer,
+.bouton-historique {
+    background-color: #7c3bde; 
+    color: white; 
+}
+
+.bouton-autre_compte:hover {
+    background-color: #c41e1e;
+}
+
+.bouton-autre_compte {
+    background-color: #e61d1d;
+}
+
+.bouton-deconnexion {
+    text-align: center;
 }

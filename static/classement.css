@@ -2,6 +2,7 @@
     font-family: sans-serif;
 }
 
+
 h1, h3 {
     text-align: center;
     color: #ffffff;
@@ -123,7 +124,7 @@ body {
 }
 
 .table-section {
-    margin-top: -25px;
+    margin-top: -27px;
 }
 
 .bouton-section {
@@ -147,7 +148,17 @@ button {
 
 .content-table th button,
 .content-table td button {
-    padding: 5px;
+    padding: 4px;
+    border-radius: 6px;
+    position: relative; 
+    background-color: transparent;
+    transition: background-color 0.5s;
+    margin-top: -100px;
+}
+
+.content-table th button:hover,
+.content-table td button:hover {
+    background-color: #995522;
 }
 
 button:hover {
@@ -231,5 +242,7 @@ button:hover {
 .bouton-facile,
 .bouton-moyen,
 .bouton-difficile {
+    border: 3px solid white;
     font-weight: bold;
 }
+

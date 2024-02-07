@@ -2,28 +2,24 @@
     font-family: sans-serif;
 }
 
-a {
-    display: inline-block;
-    background-color: #7c3bde; 
-    color: #ffffff; 
-    padding: 10px 20px;
-    text-decoration: none; 
-    border-radius: 5px; 
-    transition: background-color 0.3s; 
-}
-
-a:hover {
-    background-color: #6a2ea9;
-}
-
-
-a input[type="button"] {
+button {
     border: none;
     background: none;
     color: inherit;
-    padding: 0;
+    padding: 15px 30px; 
     cursor: pointer; 
     font: inherit; 
+    border-radius: 15px;
+    transition: background-color 0.3s;
+}
+
+.content-table th button,
+.content-table td button {
+    padding: 5px;
+}
+
+button:hover {
+    background-color: #7c3bde;
 }
 
 h1, h3 {
@@ -40,7 +36,6 @@ body {
     justify-content: center;
     margin-top: 20px;
 }
-
 
 .title-container {
     background-color: #7c3bde;
@@ -73,7 +68,6 @@ body {
     border-radius: 0 0 -5px -5px;
 }
 
-
 .content-table tbody tr {
     border-bottom: 3px solid #7c3bde;
     color: #ffffff;
@@ -85,7 +79,6 @@ body {
     font-size: 0.9em;
     min-width: 400px;
     overflow: hidden;
-    /* box-shadow: 0 0 10px #000000; */
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -105,11 +98,9 @@ body {
     border-radius: 10px 10px 0 0;
 }
 
-
 .content-table {
     box-shadow: inset 0 0 0 3px #7c3bde;
 }
-
 
 .content-table tbody tr td {
     color: #7c3bde;
@@ -136,25 +127,10 @@ body {
     margin: 0 auto;
 }
 
-
-button {
-    border: none;
-    background: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-}
-
-/* CSS */
-
-/* Ajoutez ces règles pour ajuster l'espacement entre le tableau et les boutons */
 .table-section {
-    margin-top: -32px; /* Réduit l'espace en bas du tableau */
+    margin-top: -41px;
 }
 
 .bouton-section {
-    margin-top: 0px; /* Réduit l'espace en haut des boutons */
+    margin-top: 0px;
 }
-
-

@@ -150,11 +150,11 @@ button {
 
 /* Ajoutez ces règles pour ajuster l'espacement entre le tableau et les boutons */
 .table-section {
-    margin-top: 0px; /* Réduit l'espace en bas du tableau */
+    margin-top: -32px; /* Réduit l'espace en bas du tableau */
 }
 
 .bouton-section {
-    margin-top: 10px; /* Réduit l'espace en haut des boutons */
+    margin-top: 0px; /* Réduit l'espace en haut des boutons */
 }
 
 

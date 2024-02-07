@@ -30,6 +30,8 @@ body {
     margin-bottom: 20px;
     max-width: 425px;
     margin: 0 auto;
+    border: 3px solid white; 
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .title-container h1, 
@@ -55,6 +57,7 @@ body {
     border-radius: 10px; 
     border: 3px solid #7c3bde; 
     table-layout: fixed;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .content-table th, .content-table td {
@@ -214,20 +217,24 @@ button:hover {
 .bouton-recommencer:hover,
 .bouton-historique:hover {
     background-color: #99dd22;
+    text-shadow: 8px 8px 20px rgba(0, 0, 0, 2);
 }
   
 .bouton-recommencer,
 .bouton-historique {
     background-color: #a1582c; 
     color: white; 
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.75);
 }
 
 .bouton-autre_compte:hover {
     background-color: #930e0e;
+    text-shadow: 8px 8px 20px rgba(0, 0, 0, 2);
 }
 
 .bouton-autre_compte {
     background-color: #d11111;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.75);
 }
 
 .bouton-deconnexion {
@@ -244,5 +251,6 @@ button:hover {
 .bouton-difficile {
     border: 3px solid white;
     font-weight: bold;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.75);
 }
 

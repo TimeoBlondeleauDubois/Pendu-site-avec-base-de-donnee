@@ -21,8 +21,14 @@ function toggleTable(idTableau, idArrow) {
 
 function toggleArrow(idArrow) {
     var arrow = document.getElementById(idArrow);
-    arrow.textContent = arrow.textContent.includes('⬆️') ? arrow.textContent.replace('⬆️', '⬇️') : arrow.textContent.replace('⬇️', '⬆️');
+    var image = arrow.querySelector('img');
+    if (image.getAttribute('src') === '/static/images/oeil-ferme.png') {
+        image.setAttribute('src', '/static/images/oeil-ouvert.png');
+    } else {
+        image.setAttribute('src', '/static/images/oeil-ferme.png');
+    }
 }
+
 
 document.getElementById('facile-arrow').addEventListener('click', function() {
     toggleTable('table_facile', 'facile-arrow');
@@ -34,4 +40,10 @@ document.getElementById('moyen-arrow').addEventListener('click', function() {
 
 document.getElementById('difficile-arrow').addEventListener('click', function() {
     toggleTable('table_difficile', 'difficile-arrow');
+});
+
+document.addEventListener('DOMContentLoaded', function() {  /*ne pas pouvoir surligner d'élément dans la page (peut être pénible quand on clique sur l'oeil)*/
+    document.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+    });
 });

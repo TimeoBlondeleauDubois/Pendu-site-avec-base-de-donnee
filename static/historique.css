@@ -86,6 +86,21 @@ body {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
+.stats-table{
+    border-collapse: collapse;
+    margin: 25px auto;
+    font-size: 0.9em;
+    min-width: 400px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1450px;
+    background: #ffffff;
+    border-radius: 10px; 
+    border: 3px solid #7c3bde; 
+    table-layout: fixed;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
 .content-table th, .content-table td {
     padding: 12px 15px;
     border-left: 3px solid #ffffff;
@@ -98,7 +113,28 @@ body {
     font-family: sans-serif;
 }
 
+.stats-table th, .stats-table td {
+    padding: 12px 15px;
+    border-left: 3px solid #ffffff;
+    border-right: 3px solid #ffffff;
+    text-align: center;
+    color: #fec22a;
+    border-top: none;
+    border-bottom: none; 
+    font-size: 1.4em;
+    font-family: sans-serif;
+}
+
 .content-table thead tr {
+    background-color: #995522;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+    border-bottom: none;
+}
+
+.stats-table thead tr {
     background-color: #995522;
     color: #ffffff;
     text-align: center;
@@ -123,6 +159,22 @@ body {
     color: #ffffff;
 }
 
+.stats-table tbody tr:nth-child(even) td {
+    background-color: #a1582c; 
+}
+
+.stats-table tbody tr:nth-child(odd) td {
+    background-color: #c1743f;
+}
+
+.stats-table tbody tr td {
+    border-bottom: none;
+}
+
+.stats-table tbody tr {
+    color: #ffffff;
+}
+
 .difficulty-section 
 .section-text h3 {
     margin: 0;
@@ -140,6 +192,11 @@ body {
 
 .content-table th button:hover,
 .content-table td button:hover {
+    background-color: #995522;
+}
+
+.stats-table th button:hover,
+.stats-table td button:hover {
     background-color: #995522;
 }
 
@@ -224,6 +281,11 @@ button:hover {
     border-bottom: 3px solid #ffffff; 
 }
 
+.stats-table th {
+    border-bottom: 3px solid #ffffff; 
+}
+
+
 .bouton-tous,
 .bouton-facile,
 .bouton-moyen,
@@ -238,6 +300,11 @@ button:hover {
 }
 
 .content-table {
+    min-width: 300px; 
+    max-width: 1300px; 
+}
+
+.stats-table {
     min-width: 300px; 
     max-width: 1300px; 
 }
@@ -282,4 +349,8 @@ button:hover {
 
 .bold {
     font-weight: bold;
+}
+
+.content-table {
+    visibility: hidden;
 }

@@ -1,16 +1,24 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Afficher par défaut
+    afficherTableau('table_facile');
+    afficherTableau('table_moyen');
+    afficherTableau('table_difficile');
+});
+
+
 function masquerTableau(idTableau) {
     var tableau = document.getElementById(idTableau);
-    tableau.style.display = 'none';
+    tableau.style.visibility = 'hidden';
 }
 
 function afficherTableau(idTableau) {
     var tableau = document.getElementById(idTableau);
-    tableau.style.display = 'table';
+    tableau.style.visibility = 'visible';
 }
 
 function toggleTable(idTableau, idArrow) {
     var tableau = document.getElementById(idTableau);
-    if (tableau.style.display === 'none') {
+    if (tableau.style.visibility === 'hidden') {
         afficherTableau(idTableau);
     } else {
         masquerTableau(idTableau);
@@ -29,7 +37,6 @@ function toggleArrow(idArrow) {
     }
 }
 
-
 document.getElementById('facile-arrow').addEventListener('click', function() {
     toggleTable('table_facile', 'facile-arrow');
 });
@@ -40,10 +47,4 @@ document.getElementById('moyen-arrow').addEventListener('click', function() {
 
 document.getElementById('difficile-arrow').addEventListener('click', function() {
     toggleTable('table_difficile', 'difficile-arrow');
-});
-
-document.addEventListener('DOMContentLoaded', function() {  /*ne pas pouvoir surligner d'élément dans la page (peut être pénible quand on clique sur l'oeil)*/
-    document.addEventListener('selectstart', function(e) {
-        e.preventDefault();
-    });
 });

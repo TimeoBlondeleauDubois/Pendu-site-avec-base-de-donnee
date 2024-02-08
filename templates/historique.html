@@ -6,7 +6,8 @@
     <title>Historique</title>
     <link rel="stylesheet" href="/static/historique.css">
 </head>
-<body>
+
+<body class="fade-in">
     <div class="zoom">
         <div class="title-container">
             <h1>Historique de vos parties:</h1>
@@ -17,12 +18,12 @@
         <div class="table-container">
             <div class="table-section difficulty-section">
                 <div class="title-container2" id="facile-arrow">
-                    <div class= "bold">
-                        <span>Facile :  </span>
+                    <div class="bold">
+                        <span>Facile : </span>
                     </div>
                     <img src="/static/images/oeil-ouvert.png" class="arrow" alt="Flèche pour afficher/masquer le tableau">
-                </div>                
-                <table id="table_facile" class="content-table visible">
+                </div>
+                <table id="table_facile" class="content-table visible table-transition">
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -44,13 +45,13 @@
 
             <div class="table-section difficulty-section">
                 <div class="title-container2" id="moyen-arrow">
-                    <div class= "bold">
-                        <span>Moyen :  </span>
+                    <div class="bold">
+                        <span>Moyen : </span>
                     </div>
                     <img src="/static/images/oeil-ouvert.png" class="arrow" alt="Flèche pour afficher/masquer le tableau">
                 </div>
-                
-                <table id="table_moyen" class="content-table visible">
+
+                <table id="table_moyen" class="content-table visible table-transition">
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -72,13 +73,13 @@
 
             <div class="table-section difficulty-section">
                 <div class="title-container2" id="difficile-arrow">
-                    <div class= "bold">
-                        <span>Difficile :  </span>
+                    <div class="bold">
+                        <span>Difficile : </span>
                     </div>
                     <img src="/static/images/oeil-ouvert.png" class="arrow" alt="Flèche pour afficher/masquer le tableau">
                 </div>
-                
-                <table id="table_difficile" class="content-table visible">
+
+                <table id="table_difficile" class="content-table visible table-transition">
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -115,20 +116,20 @@
                 <tr>
                     <td>Facile</td>
                     <td>{{ pourcentage_facile }}%</td>
-                    <td>{{ total_gagne_facile }}</td> 
-                    <td>{{ total_perdu_facile }}</td>  
+                    <td>{{ total_gagne_facile }}</td>
+                    <td>{{ total_perdu_facile }}</td>
                 </tr>
                 <tr>
                     <td>Moyen</td>
                     <td>{{ pourcentage_moyen }}%</td>
-                    <td>{{ total_gagne_moyen }}</td>  
-                    <td>{{ total_perdu_moyen }}</td>  
+                    <td>{{ total_gagne_moyen }}</td>
+                    <td>{{ total_perdu_moyen }}</td>
                 </tr>
                 <tr>
                     <td>Difficile</td>
                     <td>{{ pourcentage_difficile }}%</td>
-                    <td>{{ total_gagne_difficile }}</td> 
-                    <td>{{ total_perdu_difficile }}</td>  
+                    <td>{{ total_gagne_difficile }}</td>
+                    <td>{{ total_perdu_difficile }}</td>
                 </tr>
             </tbody>
         </table>
@@ -149,4 +150,5 @@
         <script src="/static/historique.js"></script>
     </div>
 </body>
+
 </html>

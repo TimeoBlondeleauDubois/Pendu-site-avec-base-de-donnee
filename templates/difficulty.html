@@ -4,29 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choisissez une difficulté</title>
+    <link rel="stylesheet" href="/static/difficulty.css">
 </head>
-<body>
-    <h1>Choisissez une difficulté</h1>
-    <form method="post" action="/dashboard">
-        <label>
-            <input type="radio" name="difficulty" value="facile" required>
-            Facile
-        </label>
-
-        <label>
-            <input type="radio" name="difficulty" value="moyen" required>
-            Moyen
-        </label>
-
-        <label>
-            <input type="radio" name="difficulty" value="difficile" required>
-            Difficile
-        </label>
-
-        <button type="submit">Commencer</button>
-        <a href="/classement_total">
-            <input type="button" value="Classement" />
-        </a>
-    </form>
+<body class="fade-in">
+    <div class="all">
+        <div class="title-container">
+            <h1>Choisissez une difficulté:</h1>
+        </div>
+        <form method="post" action="/dashboard">
+            <div class="button-wrapper">
+                <button class="bouton-facile" type="submit" name="difficulty" value="facile">Facile</button>
+                <button class="bouton-moyen" type="submit" name="difficulty" value="moyen">Moyen</button>
+                <button class="bouton-difficile" type="submit" name="difficulty" value="difficile">Difficile</button>
+            </div>
+        </form>
+        <div class="bouton-section">
+            <a href="/classement_total">
+                <button class="bouton-classement">Regarder le classement</button>
+            </a>
+            <a href="/historique">
+                <button class="bouton-historique">Regarder l'historique de vos parties et vos statistiques</button>
+            </a>
+            <a href="/">
+                <button class="bouton-autre_compte">Choisir un autre compte</button>
+            </a>
+        </div>
+    </div>
 </body>
 </html>

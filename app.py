@@ -10,7 +10,7 @@ app.secret_key = 'b_5#y2L"F4Q8z\n\xec]/'
 
 connection = sqlite3.connect('Pendu.db')
 cursor = connection.cursor()
-#est
+
 @app.route('/')
 def home():
     return render_template('login.html')

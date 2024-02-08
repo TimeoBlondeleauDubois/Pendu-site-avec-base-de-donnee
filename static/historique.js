@@ -9,11 +9,17 @@ document.addEventListener('DOMContentLoaded', function() {
 function masquerTableau(idTableau) {
     var tableau = document.getElementById(idTableau);
     tableau.style.visibility = 'hidden';
+    tableau.querySelectorAll('tr').forEach(function(row) {
+        row.style.display = 'none';
+    });
 }
 
 function afficherTableau(idTableau) {
     var tableau = document.getElementById(idTableau);
     tableau.style.visibility = 'visible';
+    tableau.querySelectorAll('tr').forEach(function(row) {
+        row.style.display = '';
+    });
 }
 
 function toggleTable(idTableau, idArrow) {
@@ -47,4 +53,10 @@ document.getElementById('moyen-arrow').addEventListener('click', function() {
 
 document.getElementById('difficile-arrow').addEventListener('click', function() {
     toggleTable('table_difficile', 'difficile-arrow');
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+    });
 });

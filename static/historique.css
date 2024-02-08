@@ -275,3 +275,7 @@ button:hover {
 .bouton-autre_compte:hover {
     padding: 12px 36px;
 }
+
+.zoom {
+    zoom: 1.25;
+}

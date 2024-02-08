@@ -7,139 +7,140 @@
     <link rel="stylesheet" href="/static/historique.css">
 </head>
 <body>
-    <div class="title-container">
-        <h1>Historique de vos parties:</h1>
-    </div>
-    <br>
-    <br>
-    <br>
-    <div class="table-container">
-        <div class="table-section difficulty-section">
-            <div class="title-container2" id="facile-arrow">
-                <span>Facile :  </span>
-                <img src="/static/images/oeil-ouvert.png" class="arrow" alt="Flèche pour afficher/masquer le tableau">
-            </div>                
-            <table id="table_facile" class="content-table visible">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Mot qui était à deviner</th>
-                        <th>Résultat</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for game in game_history_facile %}
-                    <tr>
-                        <td>{{ game[0] }}</td>
-                        <td>{{ game[1] }}</td>
-                        <td>{{ game[2] }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+    <div class="zoom">
+        <div class="title-container">
+            <h1>Historique de vos parties:</h1>
         </div>
-
-        <div class="table-section difficulty-section">
-            <div class="title-container2" id="moyen-arrow">
-                <span>Moyen :  </span>
-                <img src="/static/images/oeil-ouvert.png" class="arrow" alt="Flèche pour afficher/masquer le tableau">
+        <br>
+        <br>
+        <br>
+        <div class="table-container">
+            <div class="table-section difficulty-section">
+                <div class="title-container2" id="facile-arrow">
+                    <span>Facile :  </span>
+                    <img src="/static/images/oeil-ouvert.png" class="arrow" alt="Flèche pour afficher/masquer le tableau">
+                </div>                
+                <table id="table_facile" class="content-table visible">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Mot qui était à deviner</th>
+                            <th>Résultat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for game in game_history_facile %}
+                        <tr>
+                            <td>{{ game[0] }}</td>
+                            <td>{{ game[1] }}</td>
+                            <td>{{ game[2] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-            
-            <table id="table_moyen" class="content-table visible">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Mot qui était à deviner</th>
-                        <th>Résultat</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for game in game_history_moyen %}
-                    <tr>
-                        <td>{{ game[0] }}</td>
-                        <td>{{ game[1] }}</td>
-                        <td>{{ game[2] }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
 
-        <div class="table-section difficulty-section">
-            <div class="title-container2" id="difficile-arrow">
-                <span>Difficile :  </span>
-                <img src="/static/images/oeil-ouvert.png" class="arrow" alt="Flèche pour afficher/masquer le tableau">
+            <div class="table-section difficulty-section">
+                <div class="title-container2" id="moyen-arrow">
+                    <span>Moyen :  </span>
+                    <img src="/static/images/oeil-ouvert.png" class="arrow" alt="Flèche pour afficher/masquer le tableau">
+                </div>
+                
+                <table id="table_moyen" class="content-table visible">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Mot qui était à deviner</th>
+                            <th>Résultat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for game in game_history_moyen %}
+                        <tr>
+                            <td>{{ game[0] }}</td>
+                            <td>{{ game[1] }}</td>
+                            <td>{{ game[2] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-            
-            <table id="table_difficile" class="content-table visible">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Mot qui était à deviner</th>
-                        <th>Résultat</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for game in game_history_difficile %}
-                    <tr>
-                        <td>{{ game[0] }}</td>
-                        <td>{{ game[1] }}</td>
-                        <td>{{ game[2] }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+
+            <div class="table-section difficulty-section">
+                <div class="title-container2" id="difficile-arrow">
+                    <span>Difficile :  </span>
+                    <img src="/static/images/oeil-ouvert.png" class="arrow" alt="Flèche pour afficher/masquer le tableau">
+                </div>
+                
+                <table id="table_difficile" class="content-table visible">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Mot qui était à deviner</th>
+                            <th>Résultat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for game in game_history_difficile %}
+                        <tr>
+                            <td>{{ game[0] }}</td>
+                            <td>{{ game[1] }}</td>
+                            <td>{{ game[2] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+        <div class="title-container">
+            <h1>Vos statistiques:</h1>
+        </div>
 
-    <div class="title-container">
-        <h1>Vos statistiques:</h1>
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Difficulté</th>
+                    <th>Pourcentage de victoires</th>
+                    <th>Nombre de parties gagnées au total</th>
+                    <th>Nombre de parties perdues au total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Facile</td>
+                    <td>{{ pourcentage_facile }}%</td>
+                    <td>{{ total_gagne_facile }}</td> 
+                    <td>{{ total_perdu_facile }}</td>  
+                </tr>
+                <tr>
+                    <td>Moyen</td>
+                    <td>{{ pourcentage_moyen }}%</td>
+                    <td>{{ total_gagne_moyen }}</td>  
+                    <td>{{ total_perdu_moyen }}</td>  
+                </tr>
+                <tr>
+                    <td>Difficile</td>
+                    <td>{{ pourcentage_difficile }}%</td>
+                    <td>{{ total_gagne_difficile }}</td> 
+                    <td>{{ total_perdu_difficile }}</td>  
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <div class="bouton-section2">
+            <a href="/recommencer_une_partie">
+                <button class="bouton-recommencer">Commencer une partie</button>
+            </a>
+            <a href="/classement_total">
+                <button class="bouton-historique">Regarder le classement</button>
+            </a>
+        </div>
+        <div class="bouton-deconnexion">
+            <a href="/">
+                <button class="bouton-autre_compte">Choisir un autre compte</button>
+            </a>
+        </div>
+        <script src="/static/historique.js"></script>
     </div>
-
-    <table class="content-table">
-        <thead>
-            <tr>
-                <th>Difficulté</th>
-                <th>Pourcentage de victoires</th>
-                <th>Nombre de parties gagnées au total</th>
-                <th>Nombre de parties perdues au total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Facile</td>
-                <td>{{ pourcentage_facile }}%</td>
-                <td>{{ total_gagne_facile }}</td> 
-                <td>{{ total_perdu_facile }}</td>  
-            </tr>
-            <tr>
-                <td>Moyen</td>
-                <td>{{ pourcentage_moyen }}%</td>
-                <td>{{ total_gagne_moyen }}</td>  
-                <td>{{ total_perdu_moyen }}</td>  
-            </tr>
-            <tr>
-                <td>Difficile</td>
-                <td>{{ pourcentage_difficile }}%</td>
-                <td>{{ total_gagne_difficile }}</td> 
-                <td>{{ total_perdu_difficile }}</td>  
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <div class="bouton-section2">
-        <a href="/recommencer_une_partie">
-            <button class="bouton-recommencer">Commencer une partie</button>
-        </a>
-        <a href="/classement_total">
-            <button class="bouton-historique">Regarder le classement</button>
-        </a>
-    </div>
-    <div class="bouton-deconnexion">
-        <a href="/">
-            <button class="bouton-autre_compte">Choisir un autre compte</button>
-        </a>
-    </div>
-    <script src="/static/historique.js"></script>
 </body>
 </html>

@@ -7,7 +7,6 @@ from flask import flash
 app = Flask(__name__)
 app.secret_key = 'b_5#y2L"F4Q8z\n\xec]/'
 
-#est
 connection = sqlite3.connect('Pendu.db')
 cursor = connection.cursor()
 

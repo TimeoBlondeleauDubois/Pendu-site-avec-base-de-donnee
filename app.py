@@ -283,16 +283,16 @@ def get_historique_data(user_id):
 
     #Statistique
     total_facile = len(game_history_facile)
-    pourcentage_facile = (len([game for game in game_history_facile if game[2] == "Gagné"]) / total_facile) * 100 if total_facile > 0 else 0
+    pourcentage_facile = round((len([game for game in game_history_facile if game[2] == "Gagné"]) / total_facile) * 100, 2) if total_facile > 0 else 0
 
     total_moyen = len(game_history_moyen)
-    pourcentage_moyen = (len([game for game in game_history_moyen if game[2] == "Gagné"]) / total_moyen) * 100 if total_moyen > 0 else 0
+    pourcentage_moyen = round((len([game for game in game_history_moyen if game[2] == "Gagné"]) / total_moyen) * 100, 2) if total_moyen > 0 else 0
 
     total_difficile = len(game_history_difficile)
-    pourcentage_difficile = (len([game for game in game_history_difficile if game[2] == "Gagné"]) / total_difficile) * 100 if total_difficile > 0 else 0
+    pourcentage_difficile = round((len([game for game in game_history_difficile if game[2] == "Gagné"]) / total_difficile) * 100, 2) if total_difficile > 0 else 0
 
     total_parties = total_facile + total_moyen + total_difficile
-    pourcentage_total = (len([game for game in game_history_facile + game_history_moyen + game_history_difficile if game[2] == "Gagné"]) / total_parties) * 100 if total_parties > 0 else 0
+    pourcentage_total = round((len([game for game in game_history_facile + game_history_moyen + game_history_difficile if game[2] == "Gagné"]) / total_parties) * 100, 2) if total_parties > 0 else 0
 
     total_gagne_facile = len([game for game in game_history_facile if game[2] == "Gagné"])
     total_perdu_facile = len([game for game in game_history_facile if game[2] == "Perdu"])
@@ -332,7 +332,7 @@ def get_classement_data(sort_key):
         if sort_key == 'nom_asc_total':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) as Pourcentage_Victoires,
                     (SUM(Gagne_Facile)+SUM(Gagne_Moyen)+SUM(Gagne_Difficile)) as Victoires_total
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -342,7 +342,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nom_desc_total':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) as Pourcentage_Victoires,
                     (SUM(Gagne_Facile)+SUM(Gagne_Moyen)+SUM(Gagne_Difficile)) as Victoires_total
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -352,7 +352,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'victoire_asc_total':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) as Pourcentage_Victoires,
                     (SUM(Gagne_Facile)+SUM(Gagne_Moyen)+SUM(Gagne_Difficile)) as Victoires_total
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -362,7 +362,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'victoire_desc_total':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) as Pourcentage_Victoires,
                     (SUM(Gagne_Facile)+SUM(Gagne_Moyen)+SUM(Gagne_Difficile)) as Victoires_total
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -372,7 +372,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nombre_de_victoire_total_desc_total':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) as Pourcentage_Victoires,
                     (SUM(Gagne_Facile)+SUM(Gagne_Moyen)+SUM(Gagne_Difficile)) as Victoires_total
                 FROM 
                     Partie
@@ -386,7 +386,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nombre_de_victoire_total_asc_total':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Pourcentage_Victoires,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) as Pourcentage_Victoires,
                     (SUM(Gagne_Facile)+SUM(Gagne_Moyen)+SUM(Gagne_Difficile)) as Victoires_total
                 FROM 
                     Partie
@@ -402,7 +402,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nom_asc_facile':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'facile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'facile' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Facile,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'facile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'facile' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Facile,
                     SUM(Gagne_Facile) as Victoires_Faciles
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -412,7 +412,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nom_desc_facile':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'facile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'facile' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Facile,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'facile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'facile' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Facile,
                     SUM(Gagne_Facile) as Victoires_Faciles
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -422,7 +422,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'victoire_asc_facile':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'facile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'facile' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Facile,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'facile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'facile' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Facile,
                     SUM(Gagne_Facile) as Victoires_Faciles
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -432,7 +432,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'victoire_desc_facile':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'facile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'facile' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Facile,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'facile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'facile' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Facile,
                     SUM(Gagne_Facile) as Victoires_Faciles
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -442,7 +442,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nombre_de_victoire_total_facile_asc_facile':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'facile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'facile' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Facile,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'facile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'facile' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Facile,
                     SUM(Gagne_Facile) as Victoires_Faciles
                 FROM 
                     Partie
@@ -456,7 +456,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nombre_de_victoire_total_facile_desc_facile':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'facile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'facile' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Facile,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'facile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'facile' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Facile,
                     SUM(Gagne_Facile) as Victoires_Faciles
                 FROM 
                     Partie
@@ -472,7 +472,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nom_asc_moyen':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'moyen' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'moyen' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Moyen,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'moyen' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'moyen' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Moyen,
                     SUM(Gagne_Moyen) as Victoires_Moyen
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -482,7 +482,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nom_desc_moyen':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'moyen' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'moyen' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Moyen,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'moyen' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'moyen' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Moyen,
                     SUM(Gagne_Moyen) as Victoires_Moyen
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -492,7 +492,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'victoire_asc_moyen':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'moyen' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'moyen' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Moyen,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'moyen' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'moyen' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Moyen,
                     SUM(Gagne_Moyen) as Victoires_Moyen
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -502,7 +502,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'victoire_desc_moyen':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'moyen' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'moyen' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Moyen,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'moyen' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'moyen' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Moyen,
                     SUM(Gagne_Moyen) as Victoires_Moyen
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -512,7 +512,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nombre_de_victoire_total_moyen_asc_moyen':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'moyen' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'moyen' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Moyen,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'moyen' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'moyen' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Moyen,
                     SUM(Gagne_Moyen) as Victoires_Moyen
                 FROM 
                     Partie
@@ -526,7 +526,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nombre_de_victoire_total_moyen_desc_moyen':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'moyen' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'moyen' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Moyen,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'moyen' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'moyen' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Moyen,
                     SUM(Gagne_Moyen) as Victoires_Moyen
                 FROM 
                     Partie
@@ -542,7 +542,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nom_asc_difficile':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'difficile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'difficile' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Difficile,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'difficile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'difficile' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Difficile,
                     SUM(Gagne_Difficile) as Victoires_Difficile
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -552,7 +552,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nom_desc_difficile':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'difficile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'difficile' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Difficile,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'difficile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'difficile' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Difficile,
                     SUM(Gagne_Difficile) as Victoires_Difficile
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -562,7 +562,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'victoire_asc_difficile':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'difficile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'difficile' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Difficile,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'difficile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'difficile' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Difficile,
                     SUM(Gagne_Difficile) as Victoires_Difficile
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -572,7 +572,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'victoire_desc_difficile':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'difficile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'difficile' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Difficile,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'difficile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'difficile' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Difficile,
                     SUM(Gagne_Difficile) as Victoires_Difficile
                 FROM Partie
                 JOIN User ON Partie.User_Id = User.US_Id
@@ -582,7 +582,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nombre_de_victoire_total_difficile_desc_difficile':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'difficile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'difficile' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Difficile,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'difficile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'difficile' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Difficile,
                     SUM(Gagne_Difficile) as Victoires_Difficile
                 FROM 
                     Partie
@@ -596,7 +596,7 @@ def get_classement_data(sort_key):
         elif sort_key == 'nombre_de_victoire_total_difficile_asc_difficile':
             cursor.execute("""
                 SELECT Nom_Utilisateur, 
-                    SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'difficile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'difficile' THEN 1 ELSE 0 END) as Pourcentage_Victoires_Difficile,
+                    ROUND(SUM(CASE WHEN Resultat = 'Gagné' AND Difficulty = 'difficile' THEN 1 ELSE 0 END) * 100.0 / SUM(CASE WHEN Difficulty = 'difficile' THEN 1 ELSE 0 END), 2) as Pourcentage_Victoires_Difficile,
                     SUM(Gagne_Difficile) as Victoires_Difficile
                 FROM 
                     Partie
@@ -607,7 +607,6 @@ def get_classement_data(sort_key):
                 ORDER BY 
                     Victoires_Difficile DESC;
             """)
-        
 
         classement_data = cursor.fetchall()
     return classement_data

@@ -127,7 +127,7 @@ p {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     margin-top: 20px;
     margin-bottom: 40px;
-    min-width: 470px; /* Hauteur minimale pour le conteneur */
+    min-width: 470px;
 }
 
 

@@ -8,14 +8,28 @@
     <link rel="icon" href="/static/images/pendu.png" type="image/x-icon">
     <link rel="shortcut icon" href="/static/images/pendu.png" type="image/x-icon">
 </head>
-<body>
-    <h1>{{ resultat }}</h1>
-    <p>Le mot à deviner était : {{ mot_a_deviner }}</p>
-    <a href="/recommencer_une_partie">
-        <input type="button" value="Recommencer une partie" />
-    </a>
-    <a href="/classement_total">
-        <input type="button" value="classement" />
-    </a>
+<body class="fade-in">
+    <div class="all">
+        <div class="title-container">
+            <h1>{{ resultat }}</h1>
+        </div>
+        <div class= "text">
+            <p>Le mot à deviner était : {{ mot_a_deviner }}</p>
+        </div>
+            <div class="bouton-section">
+                <a href="/recommencer_une_partie">
+                    <button class="bouton-recommencer_une_partie">Recommencer une partie</button>
+                </a>
+                <a href="/classement_total">
+                    <button class="bouton-classement">Regarder le classement</button>
+                </a>
+                <a href="/historique">
+                    <button class="bouton-historique">Regarder l'historique de vos parties et vos statistiques</button>
+                </a>
+                <a href="/">
+                    <button class="bouton-autre_compte">Choisir un autre compte</button>
+                </a>
+            </div>
+    </div>
 </body>
 </html>

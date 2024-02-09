@@ -22,6 +22,7 @@
 
 .confirmation-modal-content p {
     color: white; 
+    text-align: center;
 }
 
 .confirmation-buttons {
@@ -42,14 +43,14 @@
     cursor: pointer;
     border-radius: 15px;
     transition: padding 0.3s ease;
-    background-color: #995522;
+    background-color: #d11111;
     display: flex;
     justify-content: center;
     text-decoration: none;
 }
 
 .confirmation-modal button#confirm-btn:hover {
-    background-color: #99dd22;
+    background-color: #930e0e;
     text-shadow: 8px 8px 20px rgba(0, 0, 0, 2);
     padding: 12px 36px;
 }
@@ -66,14 +67,14 @@
     cursor: pointer;
     border-radius: 15px;
     transition: padding 0.3s ease;
-    background-color: #d11111;
+    background-color: #99dd22;
     display: flex;
     justify-content: center;
     text-decoration: none;
 }
 
 .confirmation-modal button#cancel-btn:hover {
-    background-color: #930e0e;
+    background-color: #79be00;
     text-shadow: 8px 8px 20px rgba(0, 0, 0, 2);
     padding: 12px 36px;
 }

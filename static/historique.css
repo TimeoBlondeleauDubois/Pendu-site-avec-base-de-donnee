@@ -382,3 +382,10 @@ button:hover {
         opacity: 1;
     }
 }
+
+#deconnexion-btn {
+    display: block;
+    margin: 0px auto 0;
+    width: fit-content; 
+}
+ 

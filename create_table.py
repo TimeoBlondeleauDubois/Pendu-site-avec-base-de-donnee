@@ -252,46 +252,5 @@ cursor.execute("""
         END
 """)
 
-# Création de l'utilisateur 'a' avec mot de passe 'a'
-hashed_password_a = hashpw('a'.encode('utf-8'), gensalt())
-cursor.execute("INSERT INTO User (Nom_Utilisateur, Mot_De_Passe) VALUES (?, ?)", ('a', hashed_password_a))
-
-# Exemples pour l'utilisateur a avec des dates différentes
-cursor.execute("""
-    INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen,
-                       Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
-    VALUES (DATETIME('now', '-7 days'), 'voiture', 0, 1, 0, 1, 0, 1, 'Perdu', 'facile', 1)
-""")
-
-cursor.execute("""
-    INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen,
-                       Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
-    VALUES (DATETIME('now', '-5 days'), 'avion', 0, 0, 1, 1, 0, 1, 'Perdu', 'moyen', 1)
-""")
-
-cursor.execute("""
-    INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen,
-                       Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
-    VALUES (DATETIME('now', '-3 days'), 'argent', 0, 0, 0, 0, 1, 1, 'Perdu', 'difficile', 1)
-""")
-
-cursor.execute("""
-    INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen,
-                       Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
-    VALUES (DATETIME('now', '-2 days'), 'minuscule', 1, 0, 0, 0, 1, 0, 'Gagné', 'difficile', 1)
-""")
-
-cursor.execute("""
-    INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen,
-                       Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
-    VALUES (DATETIME('now', '-1 day'), 'index', 1, 0, 0, 0, 0, 0, 'Gagné', 'facile', 1)
-""")
-
-cursor.execute("""
-    INSERT INTO Partie (Date_Du_Jeu, Mot_A_Deviner, Gagne_Facile, Perdu_Facile, Gagne_Moyen, Perdu_Moyen,
-                       Gagne_Difficile, Perdu_Difficile, Resultat, Difficulty, User_Id)
-    VALUES (DATETIME('now'), 'sortir', 0, 0, 1, 0, 0, 1, 'Perdu', 'moyen', 1)
-""")
-
 connection.commit()
 connection.close()

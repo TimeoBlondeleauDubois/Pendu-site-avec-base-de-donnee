@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choisissez une difficulté</title>
     <link rel="stylesheet" href="/static/difficulty.css">
+    <link rel="stylesheet" href="/static/deconnexion.css">
     <link rel="icon" href="/static/images/pendu.png" type="image/x-icon">
     <link rel="shortcut icon" href="/static/images/pendu.png" type="image/x-icon">
 </head>
@@ -27,10 +28,20 @@
             <a href="/historique">
                 <button class="bouton-historique">Regarder l'historique de vos parties et vos statistiques</button>
             </a>
-            <a href="/">
+            <a href="/" id="deconnexion-btn">
                 <button class="bouton-autre_compte">Choisir un autre compte</button>
-            </a>
+            </a>            
+            <div id="confirmation-modal" class="confirmation-modal">
+                <div class="confirmation-modal-content">
+                    <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
+                    <div class="confirmation-buttons">
+                        <button id="confirm-btn">Confirmer</button>
+                        <button id="cancel-btn">Annuler</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <script src="/static/deconnexion.js"></script>
 </body>
 </html>

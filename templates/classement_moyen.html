@@ -6,6 +6,7 @@
     <title>Classement des joueurs</title>
     <link rel="stylesheet" href="/static/classement.css">
     <link rel="stylesheet" href="/static/moyen.css">
+    <link rel="stylesheet" href="/static/deconnexion.css">
     <link rel="icon" href="/static/images/pendu.png" type="image/x-icon">
     <link rel="shortcut icon" href="/static/images/pendu.png" type="image/x-icon">
 </head>
@@ -71,11 +72,19 @@
             <button class="bouton-historique">Regarder l'historique de vos parties et vos statistiques</button>
         </a>
     </div>
-    <div class="bouton-deconnexion">
-        <a href="/">
-            <button class="bouton-autre_compte">Choisir un autre compte</button>
-        </a>
+    <a href="/" id="deconnexion-btn">
+        <button class="bouton-autre_compte">Choisir un autre compte</button>
+    </a>            
+    <div id="confirmation-modal" class="confirmation-modal">
+        <div class="confirmation-modal-content">
+            <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
+            <div class="confirmation-buttons">
+                <button id="confirm-btn">Confirmer</button>
+                <button id="cancel-btn">Annuler</button>
+            </div>
+        </div>
     </div>
     </div>
+    <script src="/static/deconnexion.js"></script>
 </body>
 </html>

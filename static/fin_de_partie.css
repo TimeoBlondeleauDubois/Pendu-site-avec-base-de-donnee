@@ -27,7 +27,16 @@ body {
     border: 3px solid white;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    max-width: 30%; 
+    margin: auto; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.title-container h3 {
+    margin: 0;
 }
 
 .title-container h1,
@@ -91,19 +100,6 @@ a {
     padding: 12px 36px;
 }
 
-.bouton-autre_compte {
-    background-color: #d11111;
-    color: white;
-    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.75);
-}
-
-.bouton-autre_compte:hover {
-    background-color: #930e0e;
-    color: white;
-    text-shadow: 8px 8px 20px rgba(0, 0, 0, 2);
-    padding: 12px 36px;
-}
-
 .bouton-section {
     display: flex;
     flex-direction: column;
@@ -128,7 +124,7 @@ a {
 }
 
 .all {
-    border: 3px solid rgb(255, 255, 255);
+    border: 3px solid #ffffff;
     border-radius: 15px;
     padding: 10px;
     background-color: #c1743f;
@@ -150,7 +146,7 @@ a {
 
   .text {
     margin: 0;
-    color: white;
+    color: #fec22a;
     font-weight: bold;
     font-family: "Poppins", sans-serif;
     text-align: center;
@@ -158,4 +154,19 @@ a {
     border-radius: 15px;
     padding: 10px;
     background-color: #995522;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 50%; 
+    margin: auto; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.gagne {
+    color: #99dd22;
+}
+
+.perdu {
+    color: #d11111;
 }

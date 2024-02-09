@@ -5,31 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fin de Partie</title>
     <link rel="stylesheet" href="/static/fin_de_partie.css">
+    <link rel="stylesheet" href="/static/deconnexion.css">
     <link rel="icon" href="/static/images/pendu.png" type="image/x-icon">
     <link rel="shortcut icon" href="/static/images/pendu.png" type="image/x-icon">
 </head>
 <body class="fade-in">
     <div class="all">
         <div class="title-container">
-            <h1>{{ resultat }}</h1>
+            <h1 class="{% if resultat == 'Gagné' %}gagne{% elif resultat == 'Perdu' %}perdu{% endif %}">{{ resultat }}</h1>
         </div>
+        <br>
         <div class= "text">
             <p>Le mot à deviner était : {{ mot_a_deviner }}</p>
         </div>
-            <div class="bouton-section">
-                <a href="/recommencer_une_partie">
-                    <button class="bouton-recommencer_une_partie">Recommencer une partie</button>
-                </a>
-                <a href="/classement_total">
-                    <button class="bouton-classement">Regarder le classement</button>
-                </a>
-                <a href="/historique">
-                    <button class="bouton-historique">Regarder l'historique de vos parties et vos statistiques</button>
-                </a>
-                <a href="/">
-                    <button class="bouton-autre_compte">Choisir un autre compte</button>
-                </a>
+        <br>
+        <div class="bouton-section">
+            <a href="/recommencer_une_partie">
+                <button class="bouton-recommencer_une_partie">Recommencer une partie</button>
+            </a>
+            <a href="/classement_total">
+                <button class="bouton-classement">Regarder le classement</button>
+            </a>
+            <a href="/historique">
+                <button class="bouton-historique">Regarder l'historique de vos parties et vos statistiques</button>
+            </a>
+            <a href="/" id="deconnexion-btn">
+                <button class="bouton-autre_compte">Choisir un autre compte</button>
+            </a>            
+            <div id="confirmation-modal" class="confirmation-modal">
+                <div class="confirmation-modal-content">
+                    <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
+                    <div class="confirmation-buttons">
+                        <button id="confirm-btn">Confirmer</button>
+                        <button id="cancel-btn">Annuler</button>
+                    </div>
+                </div>
             </div>
+        </div>
     </div>
+    <script src="/static/deconnexion.js"></script>
 </body>
 </html>
+            

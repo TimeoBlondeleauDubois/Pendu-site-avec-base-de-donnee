@@ -11,19 +11,25 @@
 <body>
     <div class="all">
         <div class="title-container">
-            <h1>Jeu du Pendu</h1>
+            <h1>Jeu du Pendu:</h1>
         </div>
         <form method="POST" action="/jouer">
             <label class="devinez_une_lettre" for="lettre">Devinez une lettre :</label>
-            <input type="text" id="lettre" name="lettre" maxlength="1" required>
+            <div class="input-container">
+                <input type="text" id="lettre" name="lettre" maxlength="1" required>
+                <label for="lettre"></label>
+            </div>
             <div class="bouton-section">
                 <button class="bouton-soumettre" type="submit">Soumettre</button>
             </div>
         </form>
-        <p>{{ resultat }}</p>
-        <p>{{ message }}</p>
-        <p>Essais restants : {{ tentatives_restantes }}</p>
-        <p>Lettres déjà entrées : {% for lettre in lettres_trouvees %} {{ lettre }} {% endfor %}</p>
-    </all>
+        <div class="ensemble-p">
+            <p>{{ resultat }}</p>
+            <p>{{ message }}</p>
+            <p>Essais restants : {{ tentatives_restantes }}</p>
+            <p>Lettres déjà entrées : {% for lettre in lettres_trouvees %} {{ lettre }} {% endfor %}</p>
+        </div>
+    </div>
+    <script src="/static/game.js"></script>
 </body>
 </html>

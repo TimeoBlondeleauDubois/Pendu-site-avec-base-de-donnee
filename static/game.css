@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+    cursor: default;
 }
 
 body {
@@ -19,7 +20,7 @@ body {
 }
 
 .title-container {
-    background-color: #995522;
+    background-color: #c1743f;
     color: #ffffff;
     text-align: center;
     padding: 10px;
@@ -39,7 +40,7 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 button {
@@ -67,7 +68,7 @@ p {
 }
 
 .bouton-soumettre {
-    background-color: #995522;
+    background-color: #c1743f;
     color: white;
     text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.75);
 }
@@ -86,14 +87,14 @@ p {
     border: 3px solid rgb(255, 255, 255);
     border-radius: 15px;
     padding: 10px;
-    background-color: #995522;
+    background-color: #c1743f;
 }
 
 .all {
     border: 3px solid rgb(255, 255, 255);
     border-radius: 15px;
     padding: 20px 50px;
-    background-color: #c1743f;
+    background-color: #995522;
     zoom: 1.4;
     text-align: center;
     min-width: 550px;
@@ -115,3 +116,61 @@ p {
 .devinez_une_lettre {
     color: white;
 }
+
+.ensemble-p {
+    background-color: #c1743f;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 15px;
+    border: 3px solid white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.input-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  input#lettre {
+    font-size: 16px;
+    padding: 5px; 
+    border: none;
+    background-color: transparent;
+    color: white;
+    outline: none;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    caret-color: transparent; 
+    pointer-events: none;
+  }
+  
+  .input-container label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: default;
+  }
+  
+
+.input-container::after {
+  content: "_";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  animation: blink 1s infinite;
+}
+  

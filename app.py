@@ -123,6 +123,7 @@ def choisir_mot(difficulty):
         print("Aucun mot trouvé dans la base de données.")
         return None
     
+#Reset le pendu
 def reinitialiser_jeu():
     session.pop('mot_a_deviner', None)
     session.pop('lettres_trouvees', None)
@@ -131,8 +132,6 @@ def reinitialiser_jeu():
     session.pop('message_fin', None)
     session.pop('Date_Du_Jeu', None)
     return redirect(url_for('choose_difficulty'))
-
-
 
 def afficher_mot_cache(mot, lettres_trouvees):
     mot_cache = ""
@@ -257,10 +256,44 @@ def afficher_resultat():
 
     return render_template('fin_de_partie.html', resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty)
 
+#Déconnexion
+@app.route('/logout')
+def logout():
+    session.pop('mot_a_deviner', None)
+    session.pop('lettres_trouvees', None)
+    session.pop('tentatives_restantes', None)
+    session.pop('difficulty', None)
+    session.pop('message_fin', None)
+    session.pop('Date_Du_Jeu', None)
+    session.pop('user_id', None)
+    session.pop('mot_a_deviner', None)
+    session.pop('lettres_trouvees', None)
+    session.pop('tentatives_restantes', None)
+    session.pop('difficulty', None)
+    session.pop('message_fin', None)
+    session.pop('Date_Du_Jeu', None)
+    session.pop('user_id', None)
+    session.pop('game_history_facile', None)
+    session.pop('game_history_moyen', None)
+    session.pop('game_history_difficile', None)
+    session.pop('mot_a_deviner', None)
+    session.pop('lettres_trouvees', None)
+    session.pop('tentatives_restantes', None)
+    session.pop('difficulty', None)
+    session.pop('message_fin', None)
+    session.pop('Date_Du_Jeu', None)
+    session.pop('user_id', None)
+    session.pop('game_history_facile', None)
+    session.pop('game_history_moyen', None)
+    session.pop('game_history_difficile', None)
+    session.pop('classement_data', None)
+    session.clear()
+    return redirect("/")
+
 
 #Historique et statistique
 def get_historique_data(user_id):
-
+    
     #Historique
     with connect_db() as db:
         cursor = db.cursor()

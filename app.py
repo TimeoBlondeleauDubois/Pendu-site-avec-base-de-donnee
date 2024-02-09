@@ -206,7 +206,6 @@ def jouer():
 
 @app.route('/recommencer_une_partie')
 def recommencer_une_partie():
-    reinitialiser_jeu()
     return render_template('difficulty.html')
 
 #Score
@@ -246,7 +245,6 @@ def fin_de_partie():
         
         cursor.execute(f"UPDATE Partie SET {update_column} = {update_column} + 1 WHERE User_Id = ? AND Partie_Id = ?",
                        (user_id, cursor.lastrowid))
-
 
     return redirect(url_for('afficher_resultat', resultat=resultat, mot_a_deviner=mot_a_deviner, message_fin=message_fin, difficulty=difficulty))
 

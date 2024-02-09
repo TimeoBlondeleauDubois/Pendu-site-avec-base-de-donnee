@@ -77,20 +77,20 @@ a {
     transition: padding 0.3s ease;
 }
 
-.bouton-classement,
 .bouton-facile,
 .bouton-moyen,
-.bouton-difficile,
+.bouton-difficile {
+    background-color: #c1743f;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.bouton-classement,
 .bouton-historique {
     background-color: #c1743f;
-    color: white;
     text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.75);
 }
 
 .bouton-classement:hover,
-.bouton-facile:hover,
-.bouton-moyen:hover,
-.bouton-difficile:hover,
 .bouton-historique:hover {
     background-color: #99dd22;
     text-shadow: 8px 8px 20px rgba(0, 0, 0, 2);
@@ -131,6 +131,36 @@ a {
     border-radius: 15px;
     padding: 10px;
     background-color: #995522;
+}
+
+.bouton-facile {
+    color: #99dd22;
+}
+
+.bouton-moyen {
+    color: #ffc400;
+}
+
+.bouton-difficile {
+    color: #d11111;
+}
+
+.bouton-facile:hover {
+    background-color: #7bb812;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 2);
+    padding: 12px 36px;
+}
+
+.bouton-moyen:hover {
+    background-color: #cf9f00;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 2);
+    padding: 12px 36px;
+}
+
+.bouton-difficile:hover {
+    background-color: rgb(112, 9, 9);
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 2);
+    padding: 12px 36px;
 }
 
 .all {

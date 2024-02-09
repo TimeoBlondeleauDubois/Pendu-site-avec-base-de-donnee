@@ -81,6 +81,7 @@ def create_user(username, password):
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def choose_difficulty():
+    reinitialiser_jeu()
     if request.method == 'POST':
         difficulty = request.form['difficulty']
         return redirect(url_for('game', difficulty=difficulty))
@@ -91,15 +92,16 @@ def choose_difficulty():
 #Difficulté
 @app.route('/game/<difficulty>')
 def game(difficulty):
-    session['mot_a_deviner'] = choisir_mot(difficulty)
-    session['lettres_trouvees'] = []
-    session['tentatives_restantes'] = 6
-    session['difficulty'] = difficulty
-    session.pop('message_fin', None)
-    session['Date_Du_Jeu'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    if 'mot_a_deviner' not in session:
+        session['mot_a_deviner'] = choisir_mot(difficulty)
+        session['lettres_trouvees'] = []
+        session['tentatives_restantes'] = 6
+        session['difficulty'] = difficulty
+        session.pop('message_fin', None)
+        session['Date_Du_Jeu'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     resultat = afficher_mot_cache(session['mot_a_deviner'], session['lettres_trouvees'])
-    message = "" #Pour mettre un message
+    message = "" # Pour mettre un message
     tentatives_restantes = session['tentatives_restantes']
     lettres_trouvees = session['lettres_trouvees']
 
@@ -120,6 +122,16 @@ def choisir_mot(difficulty):
     else:
         print("Aucun mot trouvé dans la base de données.")
         return None
+    
+def reinitialiser_jeu():
+    session.pop('mot_a_deviner', None)
+    session.pop('lettres_trouvees', None)
+    session.pop('tentatives_restantes', None)
+    session.pop('difficulty', None)
+    session.pop('message_fin', None)
+    session.pop('Date_Du_Jeu', None)
+    return redirect(url_for('choose_difficulty'))
+
 
 
 def afficher_mot_cache(mot, lettres_trouvees):
@@ -194,6 +206,7 @@ def jouer():
 
 @app.route('/recommencer_une_partie')
 def recommencer_une_partie():
+    reinitialiser_jeu()
     return render_template('difficulty.html')
 
 #Score

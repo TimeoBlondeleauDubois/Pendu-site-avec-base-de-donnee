@@ -69,7 +69,6 @@ a {
 
 .bouton-classement,
 .bouton-historique,
-.bouton-autre_compte,
 .bouton-recommencer_une_partie {
     border: none;
     background: none;
@@ -170,3 +169,30 @@ a {
 .perdu {
     color: #d11111;
 }
+
+
+#deconnexion-btn button {
+    background-color: #d11111;
+    color: white;
+    border: none;
+    padding: 11px 30px;
+    border-radius: 15px;
+    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+}
+
+#deconnexion-btn button:hover {
+    background-color: #930e0e;
+    padding: 12px 36px;
+}
+
+#deconnexion-btn {
+    display: block;
+    margin: 0px auto 0;
+    width: fit-content;
+}
+
+button {
+    margin: 5px; /* Réduction de la marge autour des boutons */
+}
+

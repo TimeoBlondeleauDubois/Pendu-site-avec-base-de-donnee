@@ -62,9 +62,7 @@ def check_credentials(username, password):
         if hashpw(password.encode('utf-8'), stored_password) == stored_password:
             session['user_id'] = user_id
             return user_id
-
     return None
-
 
 #Creer un joueur
 def create_user(username, password):
@@ -88,7 +86,6 @@ def choose_difficulty():
     else:
         return render_template('difficulty.html')
 
-
 #Difficulté
 @app.route('/game/<difficulty>')
 def game(difficulty):
@@ -106,7 +103,6 @@ def game(difficulty):
     lettres_trouvees = session['lettres_trouvees']
 
     return render_template('game.html', resultat=resultat, message=message, tentatives_restantes=tentatives_restantes, lettres_trouvees=lettres_trouvees)
-
 
 #Pendu
 def choisir_mot(difficulty):
@@ -202,7 +198,6 @@ def jouer():
 
     return render_template("game.html", resultat=mot_cache, tentatives_restantes=tentatives_restantes, lettres_trouvees=lettres_trouvees, message=message)
 
-
 @app.route('/recommencer_une_partie')
 def recommencer_une_partie():
     return render_template('difficulty.html')
@@ -289,7 +284,6 @@ def logout():
     session.pop('classement_data', None)
     session.clear()
     return redirect("/")
-
 
 #Historique et statistique
 def get_historique_data(user_id):
@@ -655,7 +649,6 @@ def get_classement_data(sort_key):
         classement_data = cursor.fetchall()
     return classement_data
 
-
 @app.route('/classement_total', methods=['GET', 'POST'])
 def classement_total():
     sort_key = request.form.get('sort_key', 'nom_asc_total') #Par défaut
@@ -676,7 +669,6 @@ def classement_difficile():
     sort_key = request.form.get('sort_key', 'nom_asc_difficile') 
     classement_data = get_classement_data(sort_key)
     return render_template('classement_difficile.html', classement_data=classement_data, sort_key=sort_key)
-
 
 #Statistique + Historique de toutes les parties
 @app.route('/historique')

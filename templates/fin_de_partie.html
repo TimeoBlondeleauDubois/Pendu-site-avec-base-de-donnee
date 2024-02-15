@@ -8,42 +8,47 @@
     <link rel="stylesheet" href="/static/deconnexion.css">
     <link rel="icon" href="/static/images/pendu.png" type="image/x-icon">
     <link rel="shortcut icon" href="/static/images/pendu.png" type="image/x-icon">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="fade-in">
     <div class="all">
-        <div class="title-container">
+        <div class="title-container" data-aos="flip-up" data-aos-delay="100" data-aos-duration="500">
             <h1 class="{% if resultat == 'Gagné' %}gagne{% elif resultat == 'Perdu' %}perdu{% endif %}">{{ resultat }}</h1>
         </div>
         <br>
-        <div class= "text">
+        <div class= "text" data-aos="flip-up" data-aos-delay="500" data-aos-duration="500">
             <p>Le mot à deviner était : {{ mot_a_deviner }}</p>
         </div>
         <br>
-        <div class="bouton-section">
-            <a href="/recommencer_une_partie">
+        <div class="bouton-section" data-aos="zoom-in" data-aos-delay="900" data-aos-duration="500">
+            <a href="/recommencer_une_partie" data-aos="fade-right" data-aos-delay="900" data-aos-duration="500">
                 <button class="bouton-recommencer_une_partie">Recommencer une partie</button>
             </a>
-            <a href="/classement_total">
+            <a href="/classement_total" data-aos="fade-left" data-aos-delay="900" data-aos-duration="500">
                 <button class="bouton-classement">Regarder le classement</button>
             </a>
-            <a href="/historique">
+            <a href="/historique" data-aos="fade-right" data-aos-delay="900" data-aos-duration="500">
                 <button class="bouton-historique">Regarder l'historique de vos parties et vos statistiques</button>
             </a>
-            <a href="/logout" id="deconnexion-btn">
+            <a href="/logout" id="deconnexion-btn" data-aos="fade-left" data-aos-delay="900" data-aos-duration="500">
                 <button class="bouton-autre_compte">Choisir un autre compte</button>
-            </a>            
-            <div id="confirmation-modal" class="confirmation-modal">
-                <div class="confirmation-modal-content">
-                    <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
-                    <div class="confirmation-buttons">
-                        <button id="confirm-btn">Confirmer</button>
-                        <button id="cancel-btn">Annuler</button>
-                    </div>
+            </a>       
+        </div>     
+        <div id="confirmation-modal" class="confirmation-modal">
+            <div class="confirmation-modal-content">
+                <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
+                <div class="confirmation-buttons">
+                    <button id="confirm-btn">Confirmer</button>
+                    <button id="cancel-btn">Annuler</button>
                 </div>
             </div>
         </div>
     </div>
     <script src="/static/deconnexion.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>
             

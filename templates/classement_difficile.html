@@ -9,14 +9,15 @@
     <link rel="stylesheet" href="/static/deconnexion.css">
     <link rel="icon" href="/static/images/pendu.png" type="image/x-icon">
     <link rel="shortcut icon" href="/static/images/pendu.png" type="image/x-icon">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="fade-in">
     <div class="zoom">
-        <div class="title-container">
+        <div class="title-container" data-aos="zoom-in">
             <h1>Classement des joueurs:</h1>
         </div>
         <br>
-        <div class="bouton-section">
+        <div class="bouton-section" data-aos="zoom-in">
             <a href="/classement_total">
                 <button class="bouton-tous">TOUS</button>
             </a>
@@ -30,7 +31,7 @@
                 <button class="bouton-difficile">DIFFICILE</button>
             </a>
         </div>
-        <div class="table-section difficulty-section">
+        <div class="table-section difficulty-section" data-aos="fade-up">
         <form action="/classement_difficile" method="post">
             <table class="content-table">
                 <thead>
@@ -65,14 +66,14 @@
         </form>
     </div>
     <div class="bouton-section2">
-            <a href="/recommencer_une_partie">
+            <a href="/recommencer_une_partie" data-aos="fade-right">
                 <button class="bouton-recommencer">Commencer une partie</button>
             </a>
-            <a href="/historique">
+            <a href="/historique" data-aos="fade-left">
                 <button class="bouton-historique">Regarder l'historique de vos parties et vos statistiques</button>
             </a>
     </div>
-    <a href="/logout" id="deconnexion-btn">
+    <a href="/logout" id="deconnexion-btn" data-aos="fade-right">
         <button class="bouton-autre_compte">Choisir un autre compte</button>
     </a>            
     <div id="confirmation-modal" class="confirmation-modal">
@@ -86,5 +87,9 @@
     </div>
     </div>
     <script src="/static/deconnexion.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>

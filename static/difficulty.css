@@ -16,6 +16,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
+    overflow: hidden; 
 }
 
 .title-container {
@@ -170,16 +171,3 @@ a {
     background-color: #c1743f;
     zoom: 1.3;
 }
-
-.fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-  }

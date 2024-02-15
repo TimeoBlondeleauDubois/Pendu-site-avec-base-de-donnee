@@ -60,3 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
     });
 });
+
+window.onload = function() {
+    window.scrollTo(0, 0);
+};

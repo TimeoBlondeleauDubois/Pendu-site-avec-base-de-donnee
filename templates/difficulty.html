@@ -8,20 +8,21 @@
     <link rel="stylesheet" href="/static/deconnexion.css">
     <link rel="icon" href="/static/images/pendu.png" type="image/x-icon">
     <link rel="shortcut icon" href="/static/images/pendu.png" type="image/x-icon">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-<body class="fade-in">
+<body class="fade-in" data-aos="zoom-in">
     <div class="all">
-        <div class="title-container">
+        <div class="title-container" data-aos="zoom-in-left">
             <h1>Choisissez une difficulté:</h1>
         </div>
-        <form method="post" action="/dashboard">
+        <form method="post" action="/dashboard" data-aos="zoom-in-right">
             <div class="button-wrapper">
                 <button class="bouton-facile" type="submit" name="difficulty" value="facile">Facile</button>
                 <button class="bouton-moyen" type="submit" name="difficulty" value="moyen">Moyen</button>
                 <button class="bouton-difficile" type="submit" name="difficulty" value="difficile">Difficile</button>
             </div>
         </form>
-        <div class="bouton-section">
+        <div class="bouton-section" data-aos="zoom-in-left">
             <a href="/classement_total">
                 <button class="bouton-classement">Regarder le classement</button>
             </a>
@@ -31,17 +32,21 @@
             <a href="/logout" id="deconnexion-btn">
                 <button class="bouton-autre_compte">Choisir un autre compte</button>
             </a>            
-            <div id="confirmation-modal" class="confirmation-modal">
-                <div class="confirmation-modal-content">
-                    <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
-                    <div class="confirmation-buttons">
-                        <button id="confirm-btn">Confirmer</button>
-                        <button id="cancel-btn">Annuler</button>
-                    </div>
+        </div>
+        <div id="confirmation-modal" class="confirmation-modal">
+            <div class="confirmation-modal-content">
+                <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
+                <div class="confirmation-buttons">
+                    <button id="confirm-btn">Confirmer</button>
+                    <button id="cancel-btn">Annuler</button>
                 </div>
             </div>
         </div>
     </div>
     <script src="/static/deconnexion.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>

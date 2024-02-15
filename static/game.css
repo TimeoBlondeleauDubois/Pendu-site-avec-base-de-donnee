@@ -17,6 +17,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
+    overflow: hidden;
 }
 
 .title-container {
@@ -99,19 +100,6 @@ p {
     text-align: center;
     min-width: 550px;
 }
-
-.fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-  }
 
 .devinez_une_lettre {
     color: white;

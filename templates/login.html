@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="/static/login.css">
     <link rel="icon" href="/static/images/pendu.png" type="image/x-icon">
     <link rel="shortcut icon" href="/static/images/pendu.png" type="image/x-icon">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-<body class="fade-in">
+<body class="fade-in" data-aos="zoom-in">
     <div class="wrapper">
         <form method="post" action="/login">
             <h1>Se connecter</h1>
@@ -29,5 +30,9 @@
             <p style="color: red;">{{ error }}</p>
         {% endif %}
     </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>

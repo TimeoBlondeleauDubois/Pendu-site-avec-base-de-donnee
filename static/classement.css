@@ -259,10 +259,6 @@ button:hover {
     padding: 11px 36px;
 }
 
-.zoom {
-    zoom: 1.25;
-}
-
 #deconnexion-btn {
     display: block;
     margin: 0px auto 0;
